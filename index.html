@@ -5,96 +5,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Welcome to Eatogo</title>
-
-    <!-- Bootstrap 4 CSS -->
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <!-- Sticky Navbar Footer CSS -->
-    <link rel="stylesheet" href="./css/sticky-navbar-footer.css">
+    <title>Eatogo</title>
+    <!-- Semantic UI CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.css">
     <!-- Customized CSS -->
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./static/css/main.css">
 </head>
 
-<body>
-    <!-- Navbar -->
-    <nav class="nav navbar">
-        <div class="col-md-4 text-center">
-            <a class="nav-brand" href="landing.html">
-                <img src="./images/logo.png" width="50" height="45">
-            </a>
-        </div>
-        <div class="col-md-4 text-center"></div>
-        <div class="col-md-4 text-right"></div>
-    </nav>
+<body class="custom-shade">
 
-    <!-- Main -->
-    <div class="watch-wrapper">
-        <!-- Shade -->
-        <div class="shade">
-            <div class="info-wrapper">
-                <!-- Sign In Form -->
-                <form class="signInForm text-light">
-                    <h2 id="signInFormLabel" class="text-light text-center my-4">Sign In</h2>
-                    <div id="nameGroup" class="form-group row">
-                        <label for="inputName" class="col-sm-3 col-form-label">Name</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputName" placeholder="John Doe...">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputCellphone" class="col-sm-3 col-form-label">Cellphone</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputCellphone" placeholder="0900-123456">
-                        </div>
-                    </div>
-                    <div id="emailGroup" class="form-group row">
-                        <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputEmail" placeholder="email@example.com">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
-                        <div class="col-sm-9">
-                            <input type="password" class="form-control" id="inputPassword" placeholder="password">
-                        </div>
-                    </div>
-                    <div id="passwordAgainGroup" class="form-group row">
-                        <label for="inputPasswordAgain" class="col-sm-3 col-form-label">Password Again</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputPasswordAgain" placeholder="password again">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6 text-center">
-                            <button id="switchButton" class="btn btn-light mx-1 my-2" type="button">Sign Up</button>
-                            <button class="btn btn-outline-light mx-1 my-2" type="button">Submit</button>
-                        </div>
-                        <div class="col-md-3"></div>
-                    </div>
-                </form>
-                <!-- Sign In Form End -->
+    <!-- Navbar -->
+    <nav class="ui attached segment custom-navbar-fade custom-font-thin custom-font-spaced custom-opacity-mini">
+        <div class="ui container">
+            <div class="ui secondary stackable menu">
+                <h2 class="ui header item">
+                    <img class="ui image" src="./static/images/logo.png">
+                </h2>
+                <div class="mobile-item item custom-mobile-hide">
+                    <a class="ui header text-warning" href="/index.html">首頁</a>
+                </div>
+                <div class="mobile-item item custom-mobile-hide">
+                    <a class="ui header text-warning" href="/about.html">關於我們</a>
+                </div>
+                <div class="mobile-item item custom-mobile-hide">
+                    <a class="ui header text-warning" href="/contact.html">聯絡我們</a>
+                </div>
+                <div class="mobile-item right item custom-mobile-hide">
+                    <a class="large ui button outline-warning" href="#">登入</a>
+                </div>
             </div>
         </div>
-        <!-- Shade End -->
+        <a href="#" class="ui menu toggle icon button outline-warning custom-collapse-navbar-button">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="ui container custom-font-spaced main landing">
+        <div class="jumbotron">
+            <p class="ui inverted header custom-font-thin display-4">歡迎使用</p>
+            <h1 class="custom-font-thin text-warning display-1 custom-font-thin">
+                EAT<span class="text-white">OGO</span>
+            </h1>
+            <hr class="my-5">
+            <a class="large ui button warning" href="#">註冊</a>
+        </div>
     </div>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="col-md-6 text-center">
-            <span class="text-light">Copyright &copy; 2018 Eatogo All Rights Reserved</span>
+    <footer class="ui vertical segment custom-footer-padding custom-footer-fade custom-font-spaced custom-font-thin custom-opacity-mini one-page">
+        <div class="ui center aligned container">
+            <div class="ui three column stackable grid">
+                <div class="row">
+                    <div class="column">
+                        <p class="ui header text-warning">地址</p>
+                        <p class="text-white">台北市忠孝東路三段1號</p>
+                    </div>
+                    <div class="column">
+                        <p class="ui header text-warning">電話</p>
+                        <p class="text-white">&lpar;02&rpar;&nbsp;2771&ndash;2171</p>
+                    </div>
+                    <div class="column">
+                        <p class="ui header text-warning">Email</p>
+                        <p class="text-white">contact&commat;eatogo&period;com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ui section divider"></div>
+            <p class="text-white">&copy; 2018 Eatogo 版權所有</p>
         </div>
-        <div class="col-md-6 text center"></div>
     </footer>
-    <!-- Footer End -->
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="./js/jquery-3.3.1.min.js"></script>
-    <script src="./js/popper.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
-    <!-- Customized JS -->
-    <script src="./js/new.js"></script>
+    <!-- Semantic UI JS with jQuery JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.js"></script>
+    <script>
+        $('.ui.toggle.icon').click(function() {
+            $('.mobile-item').toggleClass('custom-mobile-hide', 1000, 'easeInOut');
+            $('.ui.toggle.icon').toggleClass('custom-collapse-navbar-button-top');
+            if ($('.ui.main.container').css('padding-top') == '120px') {
+                $('.ui.main.container').attr('style', 'padding-top: 296px !important');
+            } else {
+                $('.ui.main.container').attr('style', 'padding-top: 120px !important');
+            }
+        });
+    </script>
 </body>
 
 </html>
