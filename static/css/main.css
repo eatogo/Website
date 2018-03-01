@@ -6,6 +6,9 @@ textarea {
 	resize: none !important;
 	overflow: auto;
 }
+.custom-padded-bottom-medium {
+	padding-bottom: 2rem !important;
+}
 
 /*---------- Global Fonts settings ----------*/
 .custom-font-thin {
@@ -107,13 +110,13 @@ footer.one-page {
 p.ui.header.display-4 {
 	margin-bottom: 1rem !important;
 }
-.jumbotron>a.ui.button.warning {
+.ui.button.warning {
 	color: #fff !important;
 	background-color: #f0ad4e !important;
 	border-color: #f0ad4e !important;
 	font-weight: 100 !important;
 }
-.jumbotron>a.ui.button.warning:hover {
+.ui.button.warning:hover {
 	color: #fff !important;
 	background-color: #ec971f !important;
 	border-color: #eb9316 !important;
@@ -127,6 +130,9 @@ p.ui.header.display-4 {
 	.main.landing {
 		text-align: center !important;
 	}
+	.city.menu.field {
+		margin-right: 0 !important;
+	}
 }
 .submit {
 	color: #fff !important;
@@ -138,6 +144,20 @@ p.ui.header.display-4 {
 	color: #fff !important;
 	background-color: #ec971f !important;
 	border-color: #eb9316 !important;
+}
+.ui[class*="center aligned"].grid>.column {
+	text-align: left !important;
+}
+.ui.form .inline.fields .field {
+	padding: .62em 1em !important;
+	margin-bottom: 1em !important;
+}
+.city.menu.field {
+	margin-right: 1em;
+}
+#fileInput {
+	/* text-align: center !important; */
+	margin-top: 2rem !important;
 }
 
 /*---------- Bootstrap Color theme ----------*/

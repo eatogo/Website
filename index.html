@@ -9,7 +9,7 @@
     <!-- Semantic UI CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.css">
     <!-- Customized CSS -->
-    <link rel="stylesheet" href="./static/css/main.css">
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
 
 <body class="custom-shade">
@@ -19,7 +19,7 @@
         <div class="ui container">
             <div class="ui secondary stackable menu">
                 <h2 class="ui header item">
-                    <img class="ui image" src="./static/images/logo.png">
+                    <img class="ui image" src="/static/images/logo.png">
                 </h2>
                 <div class="mobile-item item custom-mobile-hide">
                     <a class="ui header text-warning" href="/index.html">首頁</a>
@@ -79,17 +79,8 @@
     <!-- Semantic UI JS with jQuery JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.js"></script>
-    <script>
-        $('.ui.toggle.icon').click(function() {
-            $('.mobile-item').toggleClass('custom-mobile-hide', 1000, 'easeInOut');
-            $('.ui.toggle.icon').toggleClass('custom-collapse-navbar-button-top');
-            if ($('.ui.main.container').css('padding-top') == '120px') {
-                $('.ui.main.container').attr('style', 'padding-top: 296px !important');
-            } else {
-                $('.ui.main.container').attr('style', 'padding-top: 120px !important');
-            }
-        });
-    </script>
+    <!-- Customzied JS -->
+    <script src="/static/js/common.js"></script>
 </body>
 
 </html>

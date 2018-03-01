@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Eatogo</title>
+    <title>Eatogo Store</title>
     <!-- Semantic UI CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.css">
     <!-- Customized CSS -->
@@ -18,20 +18,36 @@
     <nav class="ui attached segment custom-navbar-fade custom-font-thin custom-font-spaced custom-opacity-mini">
         <div class="ui container">
             <div class="ui secondary stackable menu">
+                <!-- Logo -->
                 <h2 class="ui header item">
                     <img class="ui image" src="/static/images/logo.png">
                 </h2>
+                <!-- Home -->
                 <div class="mobile-item item custom-mobile-hide">
                     <a class="ui header text-warning" href="/index.html">首頁</a>
                 </div>
+                <!-- About -->
                 <div class="mobile-item item custom-mobile-hide">
                     <a class="ui header text-warning" href="/about.html">關於我們</a>
                 </div>
+                <!-- Contact -->
                 <div class="mobile-item item custom-mobile-hide">
                     <a class="ui header text-warning" href="/contact.html">聯絡我們</a>
                 </div>
-                <div class="mobile-item right item custom-mobile-hide">
+                <!-- Login -->
+                <!-- <div class="mobile-item right item custom-mobile-hide">
                     <a class="large ui button outline-warning" href="#">登入</a>
+                </div> -->
+                <div class="mobile-item custom-mobile-hide right menu">
+                    <div class="ui dropdown item">
+                        <div class="text text-white custom-font-thin">
+                            <img src="https://unsplash.it/100/100?image=1005" alt="Howard" class="ui avatar image"> Howard Wang
+                        </div>
+                        <i class="dropdown icon text-white"></i>
+                        <div class="menu">
+                            <a href="#" class="item">登出</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,52 +57,64 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="ui container custom-font-spaced main">
-        <!-- Introduction -->
+    <div class="ui container custom-font-spaced main custom-padded-bottom-medium">
+        <!-- Intro -->
         <div class="ui center aligned vertical segment">
-            <h1 class="text-white custom-font-thin">關於我們</h1>
-            <p class="text-warning custom-font-thin">我們是一群程式設計師，期望透過科技，將人們更快、更多樂趣的連結在一起</p>
+            <h1 class="text-white custom-font-thin">登入成功</h1>
+            <p class="text-warning custom-font-thin">準備開始偉大的事業&excl;</p>
         </div>
         <hr class="my-5">
-        <!-- Team Members -->
-        <div class="ui three column padded center aligned stackable grid">
-            <div class="column">
-                <img class="ui centered mediumn circular image" src="/static/images/howardwang.png">
-                <h2 class="center aligned text-white">王正昊 <span class="text-warning">組長</span></h2>
-            </div>
-            <div class="column">
-                <img class="ui centered mediumn circular image" src="/static/images/peichenchung.jpg">
-                <h2 class="center aligned text-white">鍾佩辰</h2>
-            </div>
-            <div class="column">
-                <img class="ui centered mediumn circular image" src="/static/images/rogertseng.png">
-                <h2 class="center aligned text-white">曾俊博</h2>
-            </div>
-            <div class="column">
-                <img class="ui centered mediumn circular image" src="/static/images/chiahongyeh.jpg">
-                <h2 class="center aligned text-white">葉家宏</h2>
-            </div>
-            <div class="column">
-                <img class="ui centered mediumn circular image" src="/static/images/ianwang.png">
-                <h2 class="center aligned text-white">王以恩</h2>
-            </div>
-            <div class="column">
-                <img class="ui centered mediumn circular image" src="/static/images/jasonsun.png">
-                <h2 class="center aligned text-white">孫如杰</h2>
+        <!-- Function List -->
+        <div class="ui centered grid">
+            <div class="ten wide center aligned column">
+                <div class="ui divided items">
+                    <a class="item">
+                        <div bordered rounded class="ui tiny circular image">
+                            <img src="/static/images/store_1.png">
+                        </div>
+                        <div class="middle aligned content">
+                            <p class="header text-warning">旺角石頭火鍋</p>
+                        </div>
+                    </a>
+                    <div class="ui divider"></div>
+                    <a class="item">
+                        <div class="ui tiny circular image">
+                            <img src="/static/images/store_2.png">
+                        </div>
+                        <div class="middle aligned content">
+                            <p class="header text-warning">金山王家肉包</p>
+                        </div>
+                    </a>
+                    <div class="ui divider"></div>
+                    <a class="item">
+                        <div class="ui tiny circular image">
+                            <img src="/static/images/store_3.png">
+                        </div>
+                        <div class="middle aligned content">
+                            <p class="header text-warning">泰味廚房</p>
+                        </div>
+                    </a>
+                    <div class="ui divider"></div>
+                    <a class="item">
+                        <div class="ui tiny circular image">
+                            <img src="/static/images/store_4.png">
+                        </div>
+                        <div class="middle aligned content">
+                            <p class="header text-warning">淡水可口魚丸</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
+        <!-- Function List End -->
         <hr class="my-5">
-        <!-- Implemented Technologies -->
         <div class="ui padded center aligned grid">
-            <div class="ui tiny images">
-                <img class="ui circular image" src="/static/images/java.png" alt="Java">
-                <img class="ui circular image" src="/static/images/spring.png" alt="Spring">
-                <img class="ui circular image" src="/static/images/semantic-ui.png" alt="Semantic UI">
-            </div>
+            <a class="large ui button warning" href="#">開新店舖</a>
         </div>
     </div>
 
     <!-- Footer -->
+    <!-- 若店家資料在兩筆以上就需加入one-page的class -->
     <footer class="ui vertical segment custom-footer-padding custom-footer-fade custom-font-spaced custom-font-thin custom-opacity-mini">
         <div class="ui center aligned container">
             <div class="ui three column stackable grid">
