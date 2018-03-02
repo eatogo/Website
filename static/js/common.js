@@ -1,5 +1,8 @@
 $(this).ready(function () {
-    
+    // Semantic UI Dropdown
+    $('.ui.dropdown').dropdown();
+    // Semantic UI Tabs
+    $('.tabular.menu .item').tab();
 });
 
 // Collapsable Navbar
@@ -22,6 +25,3 @@ $("#twzipcode").twzipcode({
     countyName: "storeCity", // 自訂城市 select 標籤的 name 值
     districtName: "storeArea" // 自訂地區 select 標籤的 name 值
 });
-
-// Semantic UI Dropdown
-$('.ui.dropdown').dropdown();
