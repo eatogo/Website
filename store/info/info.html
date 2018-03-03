@@ -30,8 +30,19 @@
                 <div class="mobile-item item custom-mobile-hide">
                     <a class="ui header text-warning" href="/contact.html">聯絡我們</a>
                 </div>
-                <div class="mobile-item right item custom-mobile-hide">
-                    <a class="large ui button outline-warning" href="#">登入</a>
+                <div class="mobile-item item custom-mobile-hide">
+                    <a class="ui header text-warning" href="/store/home.html">管理頁面</a>
+                </div>
+                <div class="mobile-item custom-mobile-hide right menu">
+                    <div class="ui dropdown item">
+                        <div class="text text-white custom-font-thin">
+                            <img src="https://unsplash.it/100/100?image=1005" alt="Howard" class="ui avatar image"> Howard Wang
+                        </div>
+                        <i class="dropdown icon text-white"></i>
+                        <div class="menu">
+                            <a href="/index.html" class="item">登出</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -45,13 +56,14 @@
         <!-- Introduction -->
         <div class="ui center aligned vertical segment">
             <h1 class="text-white custom-font-thin">店家資訊</h1>
-            <p class="text-warning custom-font-thin">世界知名的店家都是從這些基本開始唷&excl;</p>
+            <p class="text-warning custom-font-thin">米其林星星都是從這些基本開始的唷&excl;</p>
         </div>
         <hr class="my-5">
         <!-- Main Body -->
         <div class="ui centered stackable grid">
+            <div class="four wide column"></div>
             <!-- Left Body -->
-            <div class="ui ten wide column">
+            <div class="six wide column">
                 <form class="ui form">
                     <!-- 基本資料 -->
                     <h1 class="divided header text-white custom-font-thin">基本資料</h1>
@@ -106,12 +118,12 @@
             </div>
             <!-- Left Body End -->
             <!-- Right Body -->
-            <div class="ui six wide column">
+            <div class="four wide column">
                 <h1 class="text-white custom-font-thin">店舖圖片</h1>
                 <div class="ui divider"></div>
                 <form action="" method="POST" class="center aligned">
                     <div class="field center aligned">
-                        <img class="ui medium bordered image" src="/static/images/store_5.png">
+                        <img class="ui small rounded image" src="/static/images/store_5.png">
                     </div>
                     <div class="field" id="fileInput">
                         <label for="file" class="ui icon button warning custom-font-thin">
@@ -121,15 +133,17 @@
                 </form>
             </div>
             <!-- Right Body End -->
+            <div class="two wide column"></div>
         </div>
         <hr class="my-5">
         <!-- Confirmation Section -->
         <div class="ui padded center aligned grid">
             <div class="item">
-                <button type="submit" class="large ui button warning" href="#">確定修改</button>
+                <!-- <button type="submit" class="large ui button warning">確定修改</button> -->
+                <a class="large ui button warning" href="/store/home.html">確定修改</a>
             </div>
             <div class="right item">
-                <a class="large ui red button custom-font-thin" href="#">關閉店舖</a>
+                <a class="large ui red button custom-font-thin" href="/store/landing.html">關閉店舖</a>
             </div>
         </div>
     </div>

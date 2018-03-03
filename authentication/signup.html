@@ -31,7 +31,7 @@
                     <a class="ui header text-warning" href="/contact.html">聯絡我們</a>
                 </div>
                 <div class="mobile-item right item custom-mobile-hide">
-                    <a class="large ui button outline-warning" href="#">登入</a>
+                    <a class="large ui button outline-warning" href="/authentication/login.html">登入</a>
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="ui container custom-font-spaced main">
+    <div class="ui container custom-font-spaced main custom-padded-bottom-medium">
         <!-- Introduction -->
         <div class="ui center aligned vertical segment">
             <h1 class="text-white custom-font-thin">成為會員</h1>
@@ -50,7 +50,7 @@
         <hr class="my-5">
         <div class="ui centered grid">
             <div class="eight wide column">
-                <form class="ui form">
+                <form class="ui form" action="/store/landing.html" method="POST">
                     <div class="field">
                         <label for="userName" class="text-warning">姓名</label>
                         <input type="text" name="userName" id="userName" placeholder="您的姓名" class="custom-font-thin">
@@ -79,7 +79,8 @@
                         <input type="file" name="userAvatar" id="userAvatar" style="display: none">
                     </div>
                     <div class="field">
-                        <button class="large ui button warning" type="submit">確認</button>
+                        <!-- <button class="large ui button warning" type="submit">確認</button> -->
+                        <a class="large ui button warning" href="/store/landing.html">確認</a>
                     </div>
                 </form>
             </div>

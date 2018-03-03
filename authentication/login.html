@@ -30,9 +30,9 @@
                 <div class="mobile-item item custom-mobile-hide">
                     <a class="ui header text-warning" href="/contact.html">聯絡我們</a>
                 </div>
-                <div class="mobile-item right item custom-mobile-hide">
-                    <a class="large ui button outline-warning" href="#">登入</a>
-                </div>
+                <!-- <div class="mobile-item right item custom-mobile-hide">
+                    <a class="large ui button outline-warning" href="">登入</a>
+                </div> -->
             </div>
         </div>
         <a href="#" class="ui menu toggle icon button outline-warning custom-collapse-navbar-button">
@@ -41,7 +41,7 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="ui container custom-font-spaced main">
+    <div class="ui container custom-font-spaced main custom-padded-bottom-medium">
         <!-- Introduction -->
         <div class="ui center aligned vertical segment">
             <h1 class="text-white custom-font-thin">登入</h1>
@@ -50,7 +50,7 @@
         <hr class="my-5">
         <div class="ui centered grid">
             <div class="eight wide column">
-                <form class="ui form">
+                <form class="ui form" action="/store/landing.html" method="POST">
                     <div class="field">
                         <label for="userCellphone" class="text-white">手機號碼</label>
                         <input type="tel" name="userCellphone" placeholder="您的手機號碼" class="custom-font-thin">
@@ -59,7 +59,8 @@
                         <label for="userPassword" class="text-white">密碼</label>
                         <input type="password" name="userPassword" placeholder="您的密碼" class="custom-font-thin">
                     </div>
-                    <button class="large ui button submit" type="submit">確認</button>
+                    <!-- <button class="large ui button submit" type="submit">確認</button> -->
+                    <a class="large ui button submit" href="/store/landing.html">確認</a>
                 </form>
             </div>
         </div>
