@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Eatogo</title>
+    <title>Eatogo Store</title>
     <!-- Semantic UI CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.css">
     <!-- Customized CSS -->
@@ -18,21 +18,33 @@
     <nav class="ui attached segment custom-navbar-fade custom-font-thin custom-font-spaced custom-opacity-mini">
         <div class="ui container">
             <div class="ui secondary stackable menu">
+                <!-- Logo -->
                 <h2 class="ui header item">
                     <img class="ui image" src="/static/images/logo.png">
                 </h2>
+                <!-- Home -->
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/index.html">首頁</a>
+                    <a class="ui header text-warning" href="/templates/index.html">首頁</a>
                 </div>
+                <!-- About -->
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/about.html">關於我們</a>
+                    <a class="ui header text-warning" href="/templates/about.html">關於我們</a>
                 </div>
+                <!-- Contact -->
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/contact.html">聯絡我們</a>
+                    <a class="ui header text-warning" href="/templates/contact.html">聯絡我們</a>
                 </div>
-                <!-- <div class="mobile-item right item custom-mobile-hide">
-                    <a class="large ui button outline-warning" href="">登入</a>
-                </div> -->
+                <div class="mobile-item custom-mobile-hide right menu">
+                    <div class="ui dropdown item">
+                        <div class="text text-white custom-font-thin">
+                            <img src="https://unsplash.it/100/100?image=1005" alt="Howard" class="ui avatar image"> Howard Wang
+                        </div>
+                        <i class="dropdown icon text-white"></i>
+                        <div class="menu">
+                            <a href="/templates/index.html" class="item">登出</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <a href="#" class="ui menu toggle icon button outline-warning custom-collapse-navbar-button">
@@ -42,26 +54,42 @@
 
     <!-- Main Content -->
     <div class="ui container custom-font-spaced main custom-padded-bottom-medium">
-        <!-- Introduction -->
+        <!-- Intro -->
         <div class="ui center aligned vertical segment">
-            <h1 class="text-white custom-font-thin">登入</h1>
-            <p class="text-warning custom-font-thin">感謝您再度使用Eatogo&excl;</p>
+            <h1 class="text-white custom-font-thin">商家主頁</h1>
+            <p class="text-warning custom-font-thin">今天您想做些什麼&quest;</p>
         </div>
         <hr class="my-5">
+        <!-- Function List -->
         <div class="ui centered grid">
-            <div class="eight wide column">
-                <form class="ui form" action="/store/landing.html" method="POST">
-                    <div class="field">
-                        <label for="userCellphone" class="text-white">手機號碼</label>
-                        <input type="tel" name="userCellphone" placeholder="您的手機號碼" class="custom-font-thin">
-                    </div>
-                    <div class="field">
-                        <label for="userPassword" class="text-white">密碼</label>
-                        <input type="password" name="userPassword" placeholder="您的密碼" class="custom-font-thin">
-                    </div>
-                    <!-- <button class="large ui button submit" type="submit">確認</button> -->
-                    <a class="large ui button submit" href="/store/landing.html">確認</a>
-                </form>
+            <div class="row">
+                <div class="three wide column">
+                    <a class="huge ui yellow basic button custom-font-thin" href="/templates/store/info/info.html">
+                        <i class="home icon"></i> 基本資料
+                    </a>
+                </div>
+                <div class="three wide column">
+                    <a class="huge ui yellow basic button custom-font-thin" href="/templates/store/menu/menu.html">
+                        <i class="coffee icon"></i> 菜單管理
+                    </a>
+                </div>
+                <div class="three wide column">
+                    <a class="huge ui yellow basic button custom-font-thin" href="/templates/store/order/order.html">
+                        <i class="clipboard outline icon"></i> 訂單管理
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="three wide column">
+                    <a class="huge ui yellow basic button custom-font-thin" href="/templates/store/authorization/member.html">
+                        <i class="id badge outline icon"></i> 員工管理
+                    </a>
+                </div>
+                <div class="three wide column">
+                    <a class="huge ui yellow basic button custom-font-thin" href="/templates/store/statistic/diagram.html">
+                        <i class="chart bar icon"></i> 數據統計
+                    </a>
+                </div>
             </div>
         </div>
     </div>

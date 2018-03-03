@@ -24,19 +24,20 @@
                 </h2>
                 <!-- Home -->
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/index.html">首頁</a>
+                    <a class="ui header text-warning" href="/templates/index.html">首頁</a>
                 </div>
                 <!-- About -->
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/about.html">關於我們</a>
+                    <a class="ui header text-warning" href="/templates/about.html">關於我們</a>
                 </div>
                 <!-- Contact -->
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/contact.html">聯絡我們</a>
+                    <a class="ui header text-warning" href="/templates/contact.html">聯絡我們</a>
                 </div>
-                <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/store/home.html">管理頁面</a>
-                </div>
+                <!-- Login -->
+                <!-- <div class="mobile-item right item custom-mobile-hide">
+                    <a class="large ui button outline-warning" href="#">登入</a>
+                </div> -->
                 <div class="mobile-item custom-mobile-hide right menu">
                     <div class="ui dropdown item">
                         <div class="text text-white custom-font-thin">
@@ -44,7 +45,7 @@
                         </div>
                         <i class="dropdown icon text-white"></i>
                         <div class="menu">
-                            <a href="/index.html" class="item">登出</a>
+                            <a href="/templates/index.html" class="item">登出</a>
                         </div>
                     </div>
                 </div>
@@ -59,67 +60,61 @@
     <div class="ui container custom-font-spaced main custom-padded-bottom-medium">
         <!-- Intro -->
         <div class="ui center aligned vertical segment">
-            <h1 class="text-white custom-font-thin">員工管理</h1>
-            <p class="text-warning custom-font-thin">什麼是團結的力量？一根筷子好折斷，五根筷子就&hellip;&hellip;好，沒事</p>
+            <h1 class="text-white custom-font-thin">登入成功</h1>
+            <p class="text-warning custom-font-thin">準備開始偉大的事業&excl;</p>
         </div>
         <hr class="my-5">
-        <!-- Employee List -->
-        <div class="ui middle aligned stackable grid">
-            <!-- One set of info of one employee -->
-            <div class="row">
-                <div class="four wide column">
-                    <img class="ui small circular centered image" src="/static/images/howardwang.png">
-                </div>
-                <div class="one column"></div>
-                <div class="seven wide column">
-                    <div class="ui horizontal divided relaxed big list">
-                        <span class="item text-white">王正昊</span>
-                        <span class="item text-warning">0922-518630</span>
-                    </div>
-                </div>
-                <div class="four wide center aligned column">
-                    <button href="#" class="large ui red button custom-font-thin">刪除</button>
+        <!-- Store List -->
+        <div class="ui centered grid">
+            <div class="ten wide center aligned column">
+                <div class="ui divided items">
+                    <a class="item" href="/templates/store/home.html">
+                        <div bordered rounded class="ui tiny circular image">
+                            <img src="/static/images/store_1.png">
+                        </div>
+                        <div class="middle aligned content">
+                            <p class="header text-warning">旺角石頭火鍋</p>
+                        </div>
+                    </a>
+                    <div class="ui divider"></div>
+                    <a class="item" href="/templates/store/home.html">
+                        <div class="ui tiny circular image">
+                            <img src="/static/images/store_2.png">
+                        </div>
+                        <div class="middle aligned content">
+                            <p class="header text-warning">金山王家肉包</p>
+                        </div>
+                    </a>
+                    <div class="ui divider"></div>
+                    <a class="item" href="/templates/store/home.html">
+                        <div class="ui tiny circular image">
+                            <img src="/static/images/store_3.png">
+                        </div>
+                        <div class="middle aligned content">
+                            <p class="header text-warning">泰味廚房</p>
+                        </div>
+                    </a>
+                    <div class="ui divider"></div>
+                    <a class="item" href="/templates/store/home.html">
+                        <div class="ui tiny circular image">
+                            <img src="/static/images/store_4.png">
+                        </div>
+                        <div class="middle aligned content">
+                            <p class="header text-warning">淡水可口魚丸</p>
+                        </div>
+                    </a>
                 </div>
             </div>
-            <!-- One set of info of one employee END -->
-            <div class="ui divider"></div>
-            <!-- One set of info of one employee -->
-            <div class="row">
-                <div class="four wide column">
-                    <img class="ui small circular centered image" src="/static/images/chiahongyeh.jpg">
-                </div>
-                <div class="one column"></div>
-                <div class="seven wide column">
-                    <div class="ui horizontal divided relaxed big list">
-                        <span class="item text-white">葉家宏</span>
-                        <span class="item text-warning">0936-759942</span>
-                    </div>
-                </div>
-                <div class="four wide center aligned column">
-                    <button href="#" class="large ui red button custom-font-thin">刪除</button>
-                </div>
-            </div>
-            <!-- One set of info of one employee END -->
         </div>
-        <!-- Employee End -->
+        <!-- Store List End -->
         <hr class="my-5">
         <div class="ui padded center aligned grid">
-            <form action="" class="ui form">
-                <div class="inline fields">
-                    <div class="inline field">
-                        <label for="userCellphone" class="text-warning">員工手機號碼</label>
-                        <input type="tel" name="userCellphone" id="userCellphone" placeholder="手機號碼" value="0900-112233">
-                    </div>
-                    <div class="field">
-                        <button type="button" class="large ui button warning" href="#">登記員工</button>
-                    </div>
-                </div>
-            </form>
+            <a class="large ui button warning" href="/templates/store/create.html">開新店舖</a>
         </div>
     </div>
 
     <!-- Footer -->
-    <!-- 若資料在一筆以上就需加入one-page的class -->
+    <!-- 若店家資料在兩筆以上就需加入one-page的class -->
     <footer class="ui vertical segment custom-footer-padding custom-footer-fade custom-font-spaced custom-font-thin custom-opacity-mini">
         <div class="ui center aligned container">
             <div class="ui three column stackable grid">
