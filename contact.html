@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Eatogo Store</title>
+    <title>Eatogo</title>
     <!-- Semantic UI CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.css">
     <!-- Customized CSS -->
@@ -18,35 +18,20 @@
     <nav class="ui attached segment custom-navbar-fade custom-font-thin custom-font-spaced custom-opacity-mini">
         <div class="ui container">
             <div class="ui secondary stackable menu">
-                <!-- Logo -->
                 <h2 class="ui header item">
                     <img class="ui image" src="/static/images/logo.png">
                 </h2>
-                <!-- Home -->
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/templates/index.html">首頁</a>
-                </div>
-                <!-- About -->
-                <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/templates/about.html">關於我們</a>
-                </div>
-                <!-- Contact -->
-                <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/templates/contact.html">聯絡我們</a>
+                    <a class="ui header text-warning" href="/index.html">首頁</a>
                 </div>
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/templates/store/home.html">管理頁面</a>
+                    <a class="ui header text-warning" href="/about.html">關於我們</a>
                 </div>
-                <div class="mobile-item custom-mobile-hide right menu">
-                    <div class="ui dropdown item">
-                        <div class="text text-white custom-font-thin">
-                            <img src="https://unsplash.it/100/100?image=1005" alt="Howard" class="ui avatar image"> Howard Wang
-                        </div>
-                        <i class="dropdown icon text-white"></i>
-                        <div class="menu">
-                            <a href="/templates/index.html" class="item">登出</a>
-                        </div>
-                    </div>
+                <div class="mobile-item item custom-mobile-hide">
+                    <a class="ui header text-warning" href="/contact.html">聯絡我們</a>
+                </div>
+                <div class="mobile-item right item custom-mobile-hide">
+                    <a class="large ui button outline-warning" href="/auth/login.html">登入</a>
                 </div>
             </div>
         </div>
@@ -56,36 +41,31 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="ui container custom-font-spaced main custom-padded-bottom-medium">
-        <!-- Intro -->
+    <div class="ui container custom-font-spaced main">
+        <!-- Introduction -->
         <div class="ui center aligned vertical segment">
-            <h1 class="text-white custom-font-thin">商店數據</h1>
-            <p class="text-warning custom-font-thin">你的眼睛會欺騙你，你的耳朵會欺騙你，你的經驗會欺騙你，你的想像力同樣會欺騙你，但數學不會</p>
+            <h1 class="text-white custom-font-thin">聯繫我們</h1>
+            <p class="text-warning custom-font-thin">我們很重視您的回饋</p>
         </div>
         <hr class="my-5">
-        <!-- Function List -->
-        <div class="ui internally celled grid">
-            <div class="row">
-                <div class="eight wide center aligned column">
-                    <div class="ui statistic">
-                        <div class="value text-white">
-                            5,550
-                        </div>
-                        <div class="label text-warning">
-                            <i class="heart outline"></i> 總推薦數
-                        </div>
+        <div class="ui centered grid">
+            <div class="eight wide column">
+                <form class="ui form" action="" method="POST">
+                    <div class="field">
+                        <label for="name" class="text-white">姓名</label>
+                        <input type="text" name="name" placeholder="您的姓名" class="custom-font-thin">
                     </div>
-                </div>
-                <div class="eight wide center aligned column">
-                    <div class="ui statistic">
-                        <div class="value text-white">
-                            5,550
-                        </div>
-                        <div class="label text-warning">
-                            <i class="bookmark outline"></i> 總收藏數
-                        </div>
+                    <div class="field">
+                        <label for="email" class="text-white">電子郵箱</label>
+                        <input type="email" name="email" placeholder="您的Email" class="custom-font-thin">
                     </div>
-                </div>
+                    <div class="field">
+                        <label for="feedback" class="text-white">回饋</label>
+                        <textarea rows="2" name="feedback" placeholder="您的意見" class="custom-font-thin"></textarea>
+                    </div>
+                    <!-- <button class="large ui button submit" type="submit">提交</button> -->
+                    <a class="large ui button submit" href="/index.html">提交</a>
+                </form>
             </div>
         </div>
     </div>
@@ -117,8 +97,10 @@
     <!-- Semantic UI JS with jQuery JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.js"></script>
-    <!-- Customzied JS -->
+    <!-- View Customized JS -->
     <script src="/static/js/common.js"></script>
+    <!-- Connect Eatogo API JS -->
+    <!-- <script src="/static/js/eatogoConnectApi.js"></script> -->
 </body>
 
 </html>

@@ -22,16 +22,13 @@
                     <img class="ui image" src="/static/images/logo.png">
                 </h2>
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/templates/index.html">首頁</a>
+                    <a class="ui header text-warning" href="/index.html">首頁</a>
                 </div>
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/templates/about.html">關於我們</a>
+                    <a class="ui header text-warning" href="/about.html">關於我們</a>
                 </div>
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/templates/contact.html">聯絡我們</a>
-                </div>
-                <div class="mobile-item right item custom-mobile-hide">
-                    <a class="large ui button outline-warning" href="/templates/authentication/login.html">登入</a>
+                    <a class="ui header text-warning" href="/contact.html">聯絡我們</a>
                 </div>
             </div>
         </div>
@@ -41,30 +38,26 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="ui container custom-font-spaced main">
+    <div class="ui container custom-font-spaced main custom-padded-bottom-medium">
         <!-- Introduction -->
         <div class="ui center aligned vertical segment">
-            <h1 class="text-white custom-font-thin">聯繫我們</h1>
-            <p class="text-warning custom-font-thin">我們很重視您的回饋</p>
+            <h1 class="text-white custom-font-thin">登入</h1>
+            <p class="text-warning custom-font-thin">感謝您再度使用Eatogo&excl;</p>
         </div>
         <hr class="my-5">
         <div class="ui centered grid">
             <div class="eight wide column">
                 <form class="ui form">
                     <div class="field">
-                        <label for="name" class="text-white">姓名</label>
-                        <input type="text" name="name" placeholder="您的姓名" class="custom-font-thin">
+                        <label for="userCellphone" class="text-white">手機號碼</label>
+                        <input type="tel" name="userCellphone" id="userCellphone" placeholder="您的手機號碼" class="custom-font-thin">
                     </div>
                     <div class="field">
-                        <label for="email" class="text-white">電子郵箱</label>
-                        <input type="email" name="email" placeholder="您的Email" class="custom-font-thin">
+                        <label for="userPassword" class="text-white">密碼</label>
+                        <input type="password" name="userPassword" id="userPassword" placeholder="您的密碼" class="custom-font-thin">
                     </div>
-                    <div class="field">
-                        <label for="feedback" class="text-white">回饋</label>
-                        <textarea rows="2" name="feedback" placeholder="您的意見" class="custom-font-thin"></textarea>
-                    </div>
-                    <!-- <button class="large ui button submit" type="submit">提交</button> -->
-                    <a class="large ui button submit" href="/templates/index.html">提交</a>
+                    <!-- <button class="large ui button submit" type="submit">確認</button> -->
+                    <a class="large ui button submit" href="/store/landing.html">確認</a>
                 </form>
             </div>
         </div>
@@ -99,6 +92,8 @@
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.js"></script>
     <!-- Customzied JS -->
     <script src="/static/js/common.js"></script>
+    <!-- Connect Eatogo API JS -->
+    <!-- <script src="/static/js/login.js"></script> -->
 </body>
 
 </html>

@@ -24,19 +24,19 @@
                 </h2>
                 <!-- Home -->
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/templates/index.html">首頁</a>
+                    <a class="ui header text-warning" href="/index.html">首頁</a>
                 </div>
                 <!-- About -->
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/templates/about.html">關於我們</a>
+                    <a class="ui header text-warning" href="/about.html">關於我們</a>
                 </div>
                 <!-- Contact -->
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/templates/contact.html">聯絡我們</a>
+                    <a class="ui header text-warning" href="/contact.html">聯絡我們</a>
                 </div>
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/templates/store/home.html">管理頁面</a>
-                </div>
+                        <a class="ui header text-warning" href="/store/home.html">管理頁面</a>
+                    </div>
                 <div class="mobile-item custom-mobile-hide right menu">
                     <div class="ui dropdown item">
                         <div class="text text-white custom-font-thin">
@@ -44,7 +44,7 @@
                         </div>
                         <i class="dropdown icon text-white"></i>
                         <div class="menu">
-                            <a href="/templates/index.html" class="item">登出</a>
+                            <a href="/index.html" class="item">登出</a>
                         </div>
                     </div>
                 </div>
@@ -59,73 +59,72 @@
     <div class="ui container custom-font-spaced main custom-padded-bottom-medium">
         <!-- Intro -->
         <div class="ui center aligned vertical segment">
-            <h1 class="text-white custom-font-thin">餐點編輯</h1>
-            <p class="text-warning custom-font-thin">這就是餐廳的核心</p>
+            <h1 class="text-white custom-font-thin">菜單管理</h1>
+            <p class="text-warning custom-font-thin">向世界展示你的手藝&excl;</p>
         </div>
         <hr class="my-5">
-        <!-- Main Body -->
+        <!-- Menu List -->
         <div class="ui middle aligned stackable grid">
+            <!-- One set of info of one food -->
             <div class="row">
-                <div class="four wide column"></div>
-                <!-- Edit section -->
-                <div class="six wide column">
-                    <form action="" class="ui form">
-                        <div class="field">
-                            <label class="text-warning" for="foodName">餐點名稱</label>
-                            <input type="text" name="foodName" id="foodName" placeholder="超級無敵海景佛跳牆" value="炒米粉">
-                        </div>
-                        <div class="field">
-                            <label class="text-warning" for="foodPrice">餐點價格</label>
-                            <input type="number" name="foodPrice" id="foodPrice" placeholder="1元復始" value="100">
-                        </div>
-                        <div class="field">
-                            <label class="text-warning" for="foodLimit">每日供應限制</label>
-                            <input type="number" name="foodLimit" id="foodLimit" placeholder="不要太多，也不要太少" value="1000">
-                        </div>
-                        <div class="field">
-                            <label class="text-warning" for="foodType">餐點種類</label>
-                            <div class="ui selection dropdown">
-                                <input type="hidden" name="foodType">
-                                <i class="dropdown icon"></i>
-                                <div class="default text custom-font-thin">各地菜系</div>
-                                <div class="menu">
-                                    <div class="item" data-value="chinese">中式</div>
-                                    <div class="item" data-value="japanese">日式</div>
-                                    <div class="item" data-value="american">美式</div>
-                                    <div class="item" data-value="thailand">泰式</div>
-                                    <div class="item" data-value="korean">韓式</div>
-                                    <div class="item" data-value="italian">義式</div>
-                                    <div class="item" data-value="hongkong">港式</div>
-                                    <div class="item" data-value="beverage">茶飲類</div>
-                                </div>
+                <div class="four wide column">
+                    <img class="ui small rounded centered image" src="/static/images/5-1.png">
+                </div>
+                <div class="one column"></div>
+                <div class="seven wide column">
+                    <div class="ui columns">
+                        <div class="column">
+                            <div class="ui horizontal divided relaxed big list">
+                                <span class="item text-white">紅燒牛楠</span>
+                                <span class="item text-warning">NT&dollar;160</span>
+                                <span class="item text-warning">單日1000份</span>
                             </div>
                         </div>
-                        <div class="field">
-                            <label class="text-warning" for="foodIntro">餐點簡介</label>
-                            <textarea name="foodIntro" id="foodIntro" rows="3"></textarea>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="ui divider"></div>
+                    <div class="column">
+                        <p class="text-warning">全台灣最好吃的紅燒牛楠</p>
+                    </div>
                 </div>
-                <!-- Photo section -->
                 <div class="four wide center aligned column">
-                    <form action="" method="POST" class="center aligned">
-                        <div class="field center aligned">
-                            <img class="ui small centered rounded image" src="/static/images/5-2.png">
-                        </div>
-                        <div class="field" id="fileInput">
-                            <label for="file" class="ui icon button warning custom-font-thin">
-                                <i class="file icon"></i> 開啟檔案</label>
-                            <input type="file" id="file" hidden>
-                        </div>
-                    </form>
+                    <a class="large ui button warning custom-font-thin" href="/store/menu/edit.html">編輯</a>
+                    <button class="large ui red button custom-font-thin">下架</button>
                 </div>
-                <div class="two wide column"></div>
             </div>
+            <!-- One set of info of one food END -->
+            <div class="ui divider"></div>
+            <!-- One set of info of one food -->
+            <div class="row">
+                <div class="four wide column">
+                    <img class="ui small rounded centered image" src="/static/images/5-1.png">
+                </div>
+                <div class="one column"></div>
+                <div class="seven wide column">
+                    <div class="ui columns">
+                        <div class="column">
+                            <div class="ui horizontal divided relaxed big list">
+                                <span class="item text-white">紅燒牛楠</span>
+                                <span class="item text-warning">NT&dollar;160</span>
+                                <span class="item text-warning">單日1000份</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui divider"></div>
+                    <div class="column">
+                        <p class="text-warning">全台灣最好吃的紅燒牛楠</p>
+                    </div>
+                </div>
+                <div class="four wide center aligned column">
+                    <a class="large ui button warning custom-font-thin" href="/store/menu/edit.html">編輯</a>
+                    <button class="large ui red button custom-font-thin">下架</button>
+                </div>
+            </div>
+            <!-- One set of info of one food END -->
         </div>
-        <!-- Main Body End -->
+        <!-- Function List End -->
         <hr class="my-5">
         <div class="ui padded center aligned grid">
-            <a class="large ui button warning" href="/templates/store/menu/menu.html">確認送出</a>
+            <a class="large ui button warning" href="/store/menu/edit.html">登記新菜</a>
         </div>
     </div>
 
