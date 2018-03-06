@@ -134,13 +134,13 @@ p.ui.header.display-4 {
 		margin-right: 0 !important;
 	}
 }
-.submit {
+.submitButton {
 	color: #fff !important;
 	background-color: #f0ad4e !important;
 	border-color: #f0ad4e !important;
 	font-weight: 100 !important;
 }
-.submit:hover {
+.submitButton:hover {
 	color: #fff !important;
 	background-color: #ec971f !important;
 	border-color: #eb9316 !important;
@@ -160,6 +160,13 @@ p.ui.header.display-4 {
 }
 .ui.tabular.menu .active.item {
 	color: #f0ad4e !important;
+}
+
+/*--------- Semantic UI error message ----------*/
+.ui.form .field .prompt.label {
+	background-color: #db2828 !important;
+	color: #fff !important;
+	font-weight: 100 !important;
 }
 
 /*---------- Bootstrap Color theme ----------*/
