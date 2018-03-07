@@ -50,7 +50,8 @@
         <hr class="my-5">
         <div class="ui centered grid">
             <div class="eight wide column">
-                <form class="ui form" id="signupForm">
+                <form class="ui form">
+                    <div class="ui error message"></div>
                     <div class="field">
                         <label for="signupName" class="text-warning">姓名</label>
                         <input type="text" name="signupName" id="signupName" placeholder="您的姓名" class="custom-font-thin">
@@ -78,10 +79,7 @@
                         </label>
                         <input type="file" name="userAvatar" id="userAvatar" style="display: none">
                     </div>
-                    <div class="field">
-                        <!-- <button class="large ui button warning" type="submit" id="signupButton">提交</button> -->
-                        <a class="large ui button warning" href="/store/landing.html">提交</a>
-                    </div>
+                    <button class="large ui button warning" type="submit" id="signupButton">提交</button>
                 </form>
             </div>
         </div>
@@ -117,7 +115,7 @@
     <!-- View Customized JS -->
     <script src="/static/js/common.js"></script>
     <!-- Connect Eatogo API JS -->
-    <!-- <script src="/static/js/signup.js"></script> -->
+    <script src="/static/js/signup.js"></script>
 </body>
 
 </html>

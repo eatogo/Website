@@ -13,7 +13,6 @@ $(document).ready(function () {
     $('.large.ui.button.submitButton').click(function (e) {
         e.preventDefault();
         
-        
         loginUrl = "http://localhost:8080/member/login";
         authUrl = "http://localhost:8080/member/auth";
         
@@ -22,9 +21,8 @@ $(document).ready(function () {
             if (!UID) {
                 // UID not exists
                 $.ajax({
-                    url : loginUrl,
+                    url : loginUrl + "/" + loginCellphone.val() + "/" + loginPassword.val(),
                     type : 'GET',
-                    data : "userCellphone=" + loginCellphone.val() + "&userPassword=" + loginPassword.val(),
                     contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
                     success: function(data) {
                         if (data.status == 200) {
@@ -41,9 +39,8 @@ $(document).ready(function () {
                 });
             } else {
                 // UID already exists
-                $.get(authUrl, {
-                    auth : UID
-                }, function(data) {
+                $.get(authUrl + "/" + UID
+                    , {}, function(data) {
                     if (data.status == 200) {
                         window.location.assign("http://localhost:9000/store/landing.html");
                     } else {
@@ -60,7 +57,7 @@ function setFormValidationRules() {
     $('.ui.form').form({
         fields: {
             userCellphone: {
-                identifier : 'userCellphone',
+                identifier: 'userCellphone',
                 rules: [
                     {
                         type: 'empty',
@@ -74,7 +71,7 @@ function setFormValidationRules() {
                 ]
             },
             userPassword: {
-                identifier : 'userPassword',
+                identifier: 'userPassword',
                 rules: [
                     {
                         type: 'empty',
