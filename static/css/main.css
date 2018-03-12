@@ -125,6 +125,7 @@ p.ui.header.display-4 {
 /*---------- Main body container ----------*/
 .ui.main.container {
 	padding-top: 120px !important;
+	padding-bottom: 190px !important;
 }
 @media screen and (max-width: 767px) {
 	.main.landing {

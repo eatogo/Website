@@ -1,71 +1,37 @@
 var storage = sessionStorage;
+var UID = storage['auth'];
+var authUrl = "http://localhost:8080/member/auth";
+var storeLandingUrl = "http://localhost:9000/store/landing.html";
+var signupButton = $('#signupButton');
+var signupUrl = "http://localhost:8080/member/signup";
+var signupForm = $('.ui.form');
+var signupName = $('#signupName');
+var signupCellphone = $('#signupCellphone');
+var signupPassword = $('#signupPassword');
+var ConfirmPassword = $('#confirmPassword');
+var signupEmail = $('#signupEmail');
+var errorMessageDiv = $('.ui.error.message');
 
 $(document).ready(function () {
-    // 連結網頁元素
-    signupName = $('#signupName');
-    signupCellphone = $('#signupCellphone');
-    signupPassword = $('#signupPassword');
-    ConfirmPassword = $('#confirmPassword');
-    signupEmail = $('#signupEmail');
-    UID = storage['auth'];
-    errorMessageDiv = $('.ui.error.message');
-
-    // 設定表格檢查條件
+    checkLoginStatus();
     setformValidationRules();
-
-    // 按submit按鈕開始動作
-    $('#signupButton').click(function (e) {
-        e.preventDefault();
-
-        signupUrl = "http://localhost:8080/member/signup";
-        authUrl = "http://localhost:8080/member/auth";
-
-        // 檢查表格
-        if ($('.ui.form').form('is valid')) {
-            // form is valid
-            if (!UID) {
-                // UID not exists
-                $.ajax({
-                    url : signupUrl,
-                    type : 'POST',
-                    data: {
-                        userName : signupName.val(),
-                        userCellphone : signupCellphone.val(),
-                        userPassword : signupPassword.val(),
-                        userEmail : signupEmail.val()
-                    },
-                    contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-                    success: function(data) {
-                        if (data.status == 200) {
-                            clearErrorMessage();
-                            alert('success');
-                            storage['userId'] = data.auth.userId;
-                            storage['auth'] = data.auth.userUuid;
-                            window.location.assign("http://localhost:9000/store/landing.html");
-                        } else {
-                            setErrorMessage();
-                            return false;
-                        }
-                    }
-                });
-            } else {
-                // UID already exists
-                $.get(authUrl + "/" + UID
-                    , {}, function(data) {
-                    if (data.status == 200) {
-                        window.location.assign("http://localhost:9000/store/landing.html");
-                    } else {
-                        setErrorMessage();
-                        return false;
-                    }
-                })
-            }
-        }
-    })
+    setSubmitButtonClickEventListener();
 });
 
+function checkLoginStatus() {
+    if (UID) {
+        $.get(authUrl + "/" + UID, {}, function(data) {
+            if (data.status == 200) {
+                storage['userName'] = data.user.userName;
+                storage['userAvatar'] = data.user.userAvatar;
+                window.location.assign(storeLandingUrl);
+            }
+        })
+    }
+}
+
 function setformValidationRules() {
-    $('.ui.form').form({
+    signupForm.form({
         fields: {
             signupName: {
                 identifier: 'signupName',
@@ -130,6 +96,39 @@ function setformValidationRules() {
         inline : true,
         on: 'blur'
     });
+}
+
+function setSubmitButtonClickEventListener() {
+    signupButton.click(function (e) {
+        e.preventDefault();
+        if (signupForm.form('is valid')) {
+            $.ajax({
+                url : signupUrl,
+                type : 'POST',
+                data: {
+                    userName : signupName.val(),
+                    userCellphone : signupCellphone.val(),
+                    userPassword : signupPassword.val(),
+                    userEmail : signupEmail.val()
+                },
+                contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function(data) {
+                    if (data.status == 200) {
+                        clearErrorMessage();
+                        alert('success');
+                        storage['userId'] = data.auth.userId;
+                        storage['auth'] = data.auth.userUuid;
+                        storage['userName'] = data.user.userName;
+                        storage['userAvatar'] = data.user.userAvatar;
+                        window.location.assign(storeLandingUrl);
+                    } else {
+                        setErrorMessage();
+                        return false;
+                    }
+                }
+            });
+        }
+    })
 }
 
 function setErrorMessage() {

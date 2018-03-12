@@ -1,57 +1,31 @@
 var storage = sessionStorage;
+var UID = storage['auth'];
+var authUrl = "http://localhost:8080/member/auth";
+var storeLandingUrl = "http://localhost:9000/store/landing.html";
+var loginButton = $('#loginButton');
+var loginForm = $('.ui.form');
+var loginUrl = "http://localhost:8080/member/login";
+var loginCellphone = $('#userCellphone');
+var loginPassword = $('#userPassword');
+var errorMessageDiv = $('.ui.error.message');
 
 $(document).ready(function () {
-    // binding DOM
-    loginCellphone = $('#userCellphone');
-    loginPassword = $('#userPassword');
-    UID = storage['auth'];
-    errorMessageDiv = $('.ui.error.message');
-
+    checkLoginStatus();
     setFormValidationRules();
-
-    // setting submit button click event listener
-    $('.large.ui.button.submitButton').click(function (e) {
-        e.preventDefault();
-        
-        loginUrl = "http://localhost:8080/member/login";
-        authUrl = "http://localhost:8080/member/auth";
-        
-        if( $('.ui.form').form('is valid')) {
-            // form is valid
-            if (!UID) {
-                // UID not exists
-                $.ajax({
-                    url : loginUrl + "/" + loginCellphone.val() + "/" + loginPassword.val(),
-                    type : 'GET',
-                    contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-                    success: function(data) {
-                        if (data.status == 200) {
-                            clearErrorMessage();
-                            alert('success');
-                            storage['userId'] = data.auth.userId;
-                            storage['auth'] = data.auth.userUuid;
-                            window.location.assign("http://localhost:9000/store/landing.html");
-                        } else {
-                            setErrorMessage();
-                            return false;
-                        }
-                    }
-                });
-            } else {
-                // UID already exists
-                $.get(authUrl + "/" + UID
-                    , {}, function(data) {
-                    if (data.status == 200) {
-                        window.location.assign("http://localhost:9000/store/landing.html");
-                    } else {
-                        setErrorMessage();
-                        return false;
-                    }
-                })
-            }
-        }
-    });
+    setSubmitButtonClickEventListener();
 });
+
+function checkLoginStatus() {
+    if (UID) {
+        $.get(authUrl + "/" + UID, {}, function(data) {
+            if (data.status == 200) {
+                storage['userName'] = data.user.userName;
+                storage['userAvatar'] = data.user.userAvatar;
+                window.location.assign(storeLandingUrl);
+            }
+        })
+    }
+}
 
 function setFormValidationRules() {
     $('.ui.form').form({
@@ -82,6 +56,32 @@ function setFormValidationRules() {
         },
         inline : true,
         on: 'blur'
+    });
+}
+
+function setSubmitButtonClickEventListener() {
+    loginButton.click(function (e) {
+        e.preventDefault();
+        if(loginForm.form('is valid')) {
+            $.ajax({
+                url : loginUrl + "/" + loginCellphone.val() + "/" + loginPassword.val(),
+                type : 'GET',
+                contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function(data) {
+                    if (data.status == 200) {
+                        clearErrorMessage();
+                        storage['userId'] = data.auth.userId;
+                        storage['auth'] = data.auth.userUuid;
+                        storage['userName'] = data.user.userName;
+                        storage['userAvatar'] = data.user.userAvatar;
+                        window.location.assign(storeLandingUrl);
+                    } else {
+                        setErrorMessage();
+                        return false;
+                    }
+                }
+            });
+        }
     });
 }
 
