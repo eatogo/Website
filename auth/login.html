@@ -48,6 +48,7 @@
         <div class="ui centered grid">
             <div class="eight wide column">
                 <form class="ui form">
+                    <div class="ui error message"></div>
                     <div class="field">
                         <label for="userCellphone" class="text-white">手機號碼</label>
                         <input type="tel" name="userCellphone" id="userCellphone" placeholder="您的手機號碼" class="custom-font-thin">
@@ -56,8 +57,7 @@
                         <label for="userPassword" class="text-white">密碼</label>
                         <input type="password" name="userPassword" id="userPassword" placeholder="您的密碼" class="custom-font-thin">
                     </div>
-                    <!-- <button class="large ui button submit" type="submit">確認</button> -->
-                    <a class="large ui button submit" href="/store/landing.html">確認</a>
+                    <button class="large ui button submitButton" type="submit" id="loginButton">確認</button>
                 </form>
             </div>
         </div>
@@ -90,10 +90,10 @@
     <!-- Semantic UI JS with jQuery JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.js"></script>
-    <!-- Customzied JS -->
+    <!-- Login JS -->
+    <script src="/static/js/login.js"></script>
+    <!-- Common Initialization JS -->
     <script src="/static/js/common.js"></script>
-    <!-- Connect Eatogo API JS -->
-    <!-- <script src="/static/js/login.js"></script> -->
 </body>
 
 </html>

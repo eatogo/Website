@@ -50,7 +50,8 @@
         <hr class="my-5">
         <div class="ui centered grid">
             <div class="eight wide column">
-                <form class="ui form" id="signupForm">
+                <form class="ui form">
+                    <div class="ui error message"></div>
                     <div class="field">
                         <label for="signupName" class="text-warning">姓名</label>
                         <input type="text" name="signupName" id="signupName" placeholder="您的姓名" class="custom-font-thin">
@@ -71,24 +72,21 @@
                         <label for="signupEmail" class="text-warning">電子信箱</label>
                         <input type="email" name="signupEmail" id="signupEmail" placeholder="example@user.com" class="custom-font-thin">
                     </div>
-                    <div class="field">
+                    <!-- <div class="field">
                         <p class="text-warning">會員照片</p>
                         <label for="userAvatar" class="ui icon button custom-font-thin">
                             <i class="file icon"></i> 您的玉照
                         </label>
                         <input type="file" name="userAvatar" id="userAvatar" style="display: none">
-                    </div>
-                    <div class="field">
-                        <!-- <button class="large ui button warning" type="submit" id="signupButton">提交</button> -->
-                        <a class="large ui button warning" href="/store/landing.html">提交</a>
-                    </div>
+                    </div> -->
+                    <button class="large ui button warning" type="submit" id="signupButton">提交</button>
                 </form>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="ui vertical segment custom-footer-padding custom-footer-fade custom-font-spaced custom-font-thin custom-opacity-mini">
+    <footer class="ui vertical segment custom-footer-padding custom-footer-fade custom-font-spaced custom-font-thin custom-opacity-mini one-page">
         <div class="ui center aligned container">
             <div class="ui three column stackable grid">
                 <div class="row">
@@ -114,10 +112,10 @@
     <!-- Semantic UI JS with jQuery JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.js"></script>
-    <!-- View Customized JS -->
+    <!-- Sign Up JS -->
+    <script src="/static/js/signup.js"></script>
+    <!-- Common Initialization JS -->
     <script src="/static/js/common.js"></script>
-    <!-- Connect Eatogo API JS -->
-    <!-- <script src="/static/js/signup.js"></script> -->
 </body>
 
 </html>
