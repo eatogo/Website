@@ -20,10 +20,22 @@ var indexUrl = "http://localhost:9000/index.html";
 var navbarMenuIcon = $('.ui.toggle.icon');
 var navbarMenuItem = $('.mobile-item');
 var mainContainer = $('.ui.main.container');
+var storeAuthUrl = "http://localhost:8080/store/landing"
+var storeDivider = '<div class="ui divider"></div>';
+var storeListDiv = $('#storeListDiv');
+var storeHomeUrl = "http://localhost:9000/store/home.html";
 
 $(document).ready(function() {
+    clearStoreId();
     checkLoginStatus();
+    setCollapsableNavbarMenu();
+    setStoresDiv();
+    
 });
+
+function clearStoreId() {
+    storage.removeItem('storeId');
+}
 
 function checkLoginStatus() {
     if (UID) {
@@ -61,10 +73,7 @@ function setLogoutButtonClickEventListener() {
             contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
             success : function(data) {
                 if (data.status == 200) {
-                    storage.removeItem('userId');
-                    storage.removeItem('auth');
-                    storage.removeItem('userName');
-                    storage.removeItem('userAvatar');
+                    storage.clear();
                     window.location.assign(indexUrl);
                 } else {
                     alert('logout unsuccessful');
@@ -84,5 +93,69 @@ function setCollapsableNavbarMenu() {
         } else {
             mainContainer.attr('style', 'padding-top: 120px !important');
         }
+    });
+}
+
+function setStoresDiv() {
+    if (storage['landing']) {
+        extractPayloadToStoresDiv();
+        setStoreLinkClickEventListener();
+    } else {
+        $.get(storeAuthUrl + "/" + storage['userId'], {}, function(data) {
+            if (data.status == 200) {
+                storage['landing'] = data.landing;
+                extractPayloadToStoresDiv();
+                setStoreLinkClickEventListener();
+            }
+        })
+    }
+}
+
+function extractPayloadToStoresDiv() {
+    var stores = storage['landing']; // 字串
+    var temp = jQuery.parseJSON(stores); // 陣列物件
+    var index = 1;
+    for (var key = 0; key < temp.length; key++) {
+        var store = temp[key]; // 陣列元素物件
+        if (index == 1) {
+            setSingleStore(store);
+        } else {
+            storeListDiv.append(storeDivider);
+            setSingleStore(store);
+        }
+        index++;
+    }
+}
+
+function setSingleStore(storeInfo) {
+    var storeName = storeInfo['storeName'];
+    var storeLogo;
+    if (storeInfo.storeLogo == 'defaultStore.png') {
+        storeLogo = "/static/images/defaultStore.png";
+    } else {
+        storeLogo = "/static/images/" + storeInfo.storeLogo;
+    }
+    var singleStoreDiv =
+    '<a class="item" data-storeName="' + storeName + '" data-store="' + storeInfo['storeId'] + '" href="/store/home.html">' +
+        '<div bordered rounded class="ui tiny circular image" data-store="' + storeInfo['storeId'] + '">' +
+            '<img src="' + storeLogo + '" data-store="' + storeInfo['storeId'] + '">' +
+        '</div>' +
+        '<div class="middle aligned content" data-store="' + storeInfo['storeId'] + '">' +
+            '<p class="header text-warning" data-store="' + storeInfo['storeId'] + '">' + storeName + '</p>'+
+        '</div>' +
+    '</a>';
+    storeListDiv.append(singleStoreDiv);
+}
+
+function setStoreLinkClickEventListener() {
+    $('a.item').click(function(e) {
+        alert('clicked');
+        e.preventDefault();
+        storage['storeId'] = $(this).attr('data-store');
+        storage['storeName'] = $(this).attr('data-storeName');
+        storage.removeItem('landing');
+        alert($(this).attr('data-store'));
+        window.location.assign(storeHomeUrl);
+        return false;
     });
 }

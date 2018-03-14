@@ -1,10 +1,7 @@
 var storage = sessionStorage;
 var UID = storage['auth'];
 var loginButton = $('#loginButton');
-var storeManagementDiv = 
-    '<div class="mobile-item item custom-mobile-hide">' + 
-        '<a class="ui header text-warning" href="/store/landing.html">選擇店家</a>' +
-    '</div>';
+var loginUrl = "http://localhost:9000/auth/login.html";
 var navbar = $('.ui.secondary.stackable.menu');
 var loggedInDiv = 
     '<div class="mobile-item custom-mobile-hide right menu" hidden>' + 
@@ -28,18 +25,16 @@ var mainContainer = $('.ui.main.container');
 $(document).ready(function() {
     checkLoginStatus();
     setCollapsableNavbarMenu();
+    setStoreName();
 });
 
 function checkLoginStatus() {
     if (UID) {
         loginButton.hide();
-        createStoreManagementButton();
         createLoggedInSection();
+    } else {
+        window.location.assign(loginUrl);
     }
-}
-
-function createStoreManagementButton() {
-    navbar.append(storeManagementDiv);
 }
 
 function createLoggedInSection() {
@@ -91,4 +86,8 @@ function setCollapsableNavbarMenu() {
             mainContainer.attr('style', 'padding-top: 120px !important');
         }
     });
+}
+
+function setStoreName() {
+    $('#storeName').html(storage['storeName']);
 }

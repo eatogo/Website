@@ -8,6 +8,7 @@ var loginUrl = "http://localhost:8080/member/login";
 var loginCellphone = $('#userCellphone');
 var loginPassword = $('#userPassword');
 var errorMessageDiv = $('.ui.error.message');
+var storeAuthUrl = "http://localhost:8080/store/landing"
 
 $(document).ready(function () {
     checkLoginStatus();
@@ -21,6 +22,7 @@ function checkLoginStatus() {
             if (data.status == 200) {
                 storage['userName'] = data.user.userName;
                 storage['userAvatar'] = data.user.userAvatar;
+                getStoreAuthInfos();
                 window.location.assign(storeLandingUrl);
             }
         })
@@ -74,6 +76,7 @@ function setSubmitButtonClickEventListener() {
                         storage['auth'] = data.auth.userUuid;
                         storage['userName'] = data.user.userName;
                         storage['userAvatar'] = data.user.userAvatar;
+                        getStoreAuthInfos();
                         window.location.assign(storeLandingUrl);
                     } else {
                         setErrorMessage();
@@ -97,4 +100,12 @@ function clearErrorMessage() {
         errorMessageDiv.toggle();
         errorMessageDiv.html('');
     }
+}
+
+function getStoreAuthInfos() {
+    $.get(storeAuthUrl + "/" + storage['userId'], {}, function(data) {
+        if (data.status == 200) {
+            storage['payload'] = data.payload;
+        }
+    })
 }
