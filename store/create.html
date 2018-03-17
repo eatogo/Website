@@ -30,9 +30,6 @@
                 <div class="mobile-item item custom-mobile-hide">
                     <a class="ui header text-warning" href="/contact.html">聯絡我們</a>
                 </div>
-                <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/store/home.html">管理頁面</a>
-                </div>
             </div>
         </div>
         <a href="#" class="ui menu toggle icon button outline-warning custom-collapse-navbar-button">
@@ -100,8 +97,7 @@
                         <input type="file" name="storeLogo" id="storeLogo" style="display: none">
                     </div>
                     <div class="field">
-                        <!-- <button class="large ui button warning" type="submit">確認</button> -->
-                        <a class="large ui button warning" href="/store/home.html">確認</a>
+                        <button id="createStoreButton" class="large ui button warning" type="submit">確認</button>
                     </div>
                 </form>
             </div>
@@ -135,10 +131,14 @@
     <!-- Semantic UI JS with jQuery JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.js"></script>
+    <!-- TWzipcode JS -->
+    <script src="/static/js/jquery.twzipcode-1.7.14.min.js"></script>
     <!-- Navbar JS -->
     <script src="/static/js/navbar.js"></script>
     <!-- Common Initialization JS -->
     <script src="/static/js/common.js"></script>
+    <!-- Create JS -->
+    <script src="/static/js/createStore.js"></script>
 </body>
 
 </html>

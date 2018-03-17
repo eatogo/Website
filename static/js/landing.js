@@ -97,18 +97,13 @@ function setCollapsableNavbarMenu() {
 }
 
 function setStoresDiv() {
-    if (storage['landing']) {
-        extractPayloadToStoresDiv();
-        setStoreLinkClickEventListener();
-    } else {
-        $.get(storeAuthUrl + "/" + storage['userId'], {}, function(data) {
-            if (data.status == 200) {
-                storage['landing'] = data.landing;
-                extractPayloadToStoresDiv();
-                setStoreLinkClickEventListener();
-            }
-        })
-    }
+    $.get(storeAuthUrl + "/" + storage['userId'], {}, function(data) {
+        if (data.status == 200) {
+            storage['landing'] = data.landing;
+            extractPayloadToStoresDiv();
+            setStoreLinkClickEventListener();
+        }
+    })
 }
 
 function extractPayloadToStoresDiv() {

@@ -30,7 +30,8 @@ function initializeZipcodeDropdown() {
             zipcodeIntoDistrict: true, // 郵遞區號自動顯示在地區
             css: ["city menu field", "menu field"], // 自訂 "城市"、"地區" class 名稱 
             countyName: "storeCity", // 自訂城市 select 標籤的 name 值
-            districtName: "storeArea" // 自訂地區 select 標籤的 name 值
+            districtName: "storeArea", // 自訂地區 select 標籤的 name 值
+            zipcodeName: "zipcode"
         });
     }
 }
