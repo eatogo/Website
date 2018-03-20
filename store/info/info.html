@@ -59,36 +59,36 @@
                     <div class="ui divider"></div>
                     <div class="field twelve column">
                         <label class="text-warning">店鋪名稱</label>
-                        <input type="text" name="storeName" placeholder="您的店鋪名稱" value="海提竹筍餐廳">
+                        <input type="text" name="storeName" id="storeName" placeholder="您的店鋪名稱">
                     </div>
                     <div class="field twelve column">
                         <label class="text-warning">店鋪地址</label>
-                        <input type="text" name="storeAddress" placeholder="店鋪地址" value="新北市新店區寶橋路1號">
+                        <input type="text" name="storeAddress" id="storeAddress" placeholder="店鋪地址">
                     </div>
                     <div class="field twelve column">
                         <label class="text-warning">店鋪電話</label>
-                        <input type="tel" name="storePhone" placeholder="02-11223344" value="02-12345678">
+                        <input type="tel" name="storePhone" id="storePhone" placeholder="02-11223344">
                     </div>
                     <div class="field twelve column">
                         <label class="text-warning">電子郵件信箱</label>
-                        <input type="email" name="storeEmail" placeholder="example@mail.com" value="contact@eatogo.com">
+                        <input type="email" name="storeEmail" id="storeEmail" placeholder="example@mail.com">
                     </div>
                     <div class="field twelve column">
                         <label class="text-warning">營業時間</label>
-                        <input type="text" name="storeOpenHour" placeholder="AM 11:00 - PM 21:00" value="AM 11:00 - PM 21:00">
+                        <input type="text" name="storeOpenHour" id="storeOpenHour" placeholder="AM 11:00 - PM 21:00">
                     </div>
                     <div class="field twelve column">
                         <label class="text-warning">店舖簡介</label>
-                        <textarea name="storeInfo" placeholder="請簡單描述您的店舖" rows="5">全台灣第一小吃攤</textarea>
+                        <textarea name="storeIntro" id="storeIntro" placeholder="請簡單描述您的店舖" rows="5"></textarea>
                     </div>
                     <!-- 基本資料 End -->
                     <!-- 營業設定 -->
                     <h1 class="divided header text-white custom-font-thin">營業設定</h1>
                     <div class="ui divider"></div>
-                    <div class="field column">
+                    <!-- <div class="field column">
                         <label class="text-warning">店舖地區</label>
                         <div id="twzipcode" class="inline fields"></div>
-                    </div>
+                    </div> -->
                     <div class="field column">
                         <label class="text-warning">營業模式</label>
                         <div class="ui selection dropdown">
@@ -128,11 +128,10 @@
         <!-- Confirmation Section -->
         <div class="ui padded center aligned grid">
             <div class="item">
-                <!-- <button type="submit" class="large ui button warning">確定修改</button> -->
-                <a class="large ui button warning" href="/store/home.html">確定修改</a>
+                <button type="submit" id="submitButton" class="large ui button warning">確定修改</button>
             </div>
             <div class="right item">
-                <a class="large ui red button custom-font-thin" href="/store/landing.html">關閉店舖</a>
+                <button type="submit" id="closeStoreButton" class="large ui red button custom-font-thin">關閉店舖</button>
             </div>
         </div>
     </div>
@@ -164,12 +163,12 @@
     <!-- Semantic UI JS with jQuery JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.js"></script>
-    <!-- TWzipcode JS -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery-twzipcode@1.7.1-4.1/jquery.twzipcode.min.js"></script>
     <!-- Navbar JS -->
     <script src="/static/js/navbar.js"></script>
     <!-- Common Initialization JS -->
     <script src="/static/js/common.js"></script>
+    <!-- Info JS -->
+    <script src="/static/js/storeInfo.js"></script>
 </body>
 
 </html>

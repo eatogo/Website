@@ -103,7 +103,7 @@ function setStoresDiv() {
             extractPayloadToStoresDiv();
             setStoreLinkClickEventListener();
         }
-    })
+    {}})
 }
 
 function extractPayloadToStoresDiv() {
