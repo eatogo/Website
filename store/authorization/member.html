@@ -35,7 +35,7 @@
                     <a class="ui header text-warning" href="/contact.html">聯絡我們</a>
                 </div>
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/store/home.html">管理頁面</a>
+                    <a id="storeHomeButton" class="ui header text-warning">管理頁面</a>
                 </div>
             </div>
         </div>
@@ -53,42 +53,8 @@
         </div>
         <hr class="my-5">
         <!-- Employee List -->
-        <div class="ui middle aligned stackable grid">
-            <!-- One set of info of one employee -->
-            <div class="row">
-                <div class="four wide column">
-                    <img class="ui small circular centered image" src="/static/images/howardwang.png">
-                </div>
-                <div class="one column"></div>
-                <div class="seven wide column">
-                    <div class="ui horizontal divided relaxed big list">
-                        <span class="item text-white">王正昊</span>
-                        <span class="item text-warning">0922-518630</span>
-                    </div>
-                </div>
-                <div class="four wide center aligned column">
-                    <button href="#" class="large ui red button custom-font-thin">刪除</button>
-                </div>
-            </div>
-            <!-- One set of info of one employee END -->
-            <div class="ui divider"></div>
-            <!-- One set of info of one employee -->
-            <div class="row">
-                <div class="four wide column">
-                    <img class="ui small circular centered image" src="/static/images/chiahongyeh.jpg">
-                </div>
-                <div class="one column"></div>
-                <div class="seven wide column">
-                    <div class="ui horizontal divided relaxed big list">
-                        <span class="item text-white">葉家宏</span>
-                        <span class="item text-warning">0936-759942</span>
-                    </div>
-                </div>
-                <div class="four wide center aligned column">
-                    <button href="#" class="large ui red button custom-font-thin">刪除</button>
-                </div>
-            </div>
-            <!-- One set of info of one employee END -->
+        <div id="employeeListDiv" class="ui middle aligned stackable grid">
+            <!-- Employee List Area -->
         </div>
         <!-- Employee End -->
         <hr class="my-5">
@@ -97,10 +63,10 @@
                 <div class="inline fields">
                     <div class="inline field">
                         <label for="userCellphone" class="text-warning">員工手機號碼</label>
-                        <input type="tel" name="userCellphone" id="userCellphone" placeholder="手機號碼" value="0900-112233">
+                        <input type="tel" name="userCellphone" id="userCellphone" placeholder="手機號碼">
                     </div>
                     <div class="field">
-                        <button type="button" class="large ui button warning" href="#">登記員工</button>
+                        <button type="button" id="createEmployee" class="large ui button warning">登記員工</button>
                     </div>
                 </div>
             </form>
@@ -138,6 +104,8 @@
     <script src="/static/js/navbar.js"></script>
     <!-- Common Initialization JS -->
     <script src="/static/js/common.js"></script>
+    <!-- Employee Management JS -->
+    <script src="/static/js/storeMember.js"></script>
 </body>
 
 </html>
