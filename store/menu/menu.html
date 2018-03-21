@@ -53,67 +53,13 @@
         </div>
         <hr class="my-5">
         <!-- Menu List -->
-        <div class="ui middle aligned stackable grid">
-            <!-- One set of info of one food -->
-            <div class="row">
-                <div class="four wide column">
-                    <img class="ui small rounded centered image" src="/static/images/5-1.png">
-                </div>
-                <div class="one column"></div>
-                <div class="seven wide column">
-                    <div class="ui columns">
-                        <div class="column">
-                            <div class="ui horizontal divided relaxed big list">
-                                <span class="item text-white">紅燒牛楠</span>
-                                <span class="item text-warning">NT&dollar;160</span>
-                                <span class="item text-warning">單日1000份</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui divider"></div>
-                    <div class="column">
-                        <p class="text-warning">全台灣最好吃的紅燒牛楠</p>
-                    </div>
-                </div>
-                <div class="four wide center aligned column">
-                    <a class="large ui button warning custom-font-thin" href="/store/menu/edit.html">編輯</a>
-                    <button class="large ui red button custom-font-thin">下架</button>
-                </div>
-            </div>
-            <!-- One set of info of one food END -->
-            <div class="ui divider"></div>
-            <!-- One set of info of one food -->
-            <div class="row">
-                <div class="four wide column">
-                    <img class="ui small rounded centered image" src="/static/images/5-1.png">
-                </div>
-                <div class="one column"></div>
-                <div class="seven wide column">
-                    <div class="ui columns">
-                        <div class="column">
-                            <div class="ui horizontal divided relaxed big list">
-                                <span class="item text-white">紅燒牛楠</span>
-                                <span class="item text-warning">NT&dollar;160</span>
-                                <span class="item text-warning">單日1000份</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui divider"></div>
-                    <div class="column">
-                        <p class="text-warning">全台灣最好吃的紅燒牛楠</p>
-                    </div>
-                </div>
-                <div class="four wide center aligned column">
-                    <a class="large ui button warning custom-font-thin" href="/store/menu/edit.html">編輯</a>
-                    <button class="large ui red button custom-font-thin">下架</button>
-                </div>
-            </div>
-            <!-- One set of info of one food END -->
+        <div id="menuListDiv" class="ui middle aligned stackable grid">
+            <!-- Menu Area -->
         </div>
         <!-- Function List End -->
         <hr class="my-5">
         <div class="ui padded center aligned grid">
-            <a class="large ui button warning" href="/store/menu/edit.html">登記新菜</a>
+            <a id="createFoodButton" class="large ui button warning" href="/store/menu/edit.html">登記新菜</a>
         </div>
     </div>
 
@@ -148,6 +94,8 @@
     <script src="/static/js/navbar.js"></script>
     <!-- Common Initialization JS -->
     <script src="/static/js/common.js"></script>
+    <!-- Food Info JS -->
+    <script src="/static/js/foodInfo.js"></script>
 </body>
 
 </html>
