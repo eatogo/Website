@@ -35,7 +35,7 @@
                     <a class="ui header text-warning" href="/contact.html">聯絡我們</a>
                 </div>
                 <div class="mobile-item item custom-mobile-hide">
-                    <a class="ui header text-warning" href="/store/home.html">管理頁面</a>
+                    <a id="storeHomeButton" class="ui header text-warning" href="/store/home.html">管理頁面</a>
                 </div>
             </div>
         </div>
@@ -61,15 +61,15 @@
                     <form action="" class="ui form">
                         <div class="field">
                             <label class="text-warning" for="foodName">餐點名稱</label>
-                            <input type="text" name="foodName" id="foodName" placeholder="超級無敵海景佛跳牆" value="炒米粉">
+                            <input type="text" name="foodName" id="foodName" placeholder="超級無敵海景佛跳牆">
                         </div>
                         <div class="field">
                             <label class="text-warning" for="foodPrice">餐點價格</label>
-                            <input type="number" name="foodPrice" id="foodPrice" placeholder="1元復始" value="100">
+                            <input type="number" name="foodPrice" id="foodPrice" placeholder="1元復始">
                         </div>
                         <div class="field">
                             <label class="text-warning" for="foodLimit">每日供應限制</label>
-                            <input type="number" name="foodLimit" id="foodLimit" placeholder="不要太多，也不要太少" value="1000">
+                            <input type="number" name="foodLimit" id="foodLimit" placeholder="不要太多，也不要太少">
                         </div>
                         <div class="field">
                             <label class="text-warning" for="foodType">餐點種類</label>
@@ -114,7 +114,8 @@
         <!-- Main Body End -->
         <hr class="my-5">
         <div class="ui padded center aligned grid">
-            <a class="large ui button warning" href="/store/menu/menu.html">確認送出</a>
+            <button id="submitButton" class="large ui button warning">確認送出</button>
+            <!-- <a class="large ui button warning" href="/store/menu/menu.html">確認送出</a> -->
         </div>
     </div>
 
@@ -149,6 +150,8 @@
     <script src="/static/js/navbar.js"></script>
     <!-- Common Initialization JS -->
     <script src="/static/js/common.js"></script>
+    <!-- Edit Food JS -->
+    <script src="/static/js/foodEdit.js"></script>
 </body>
 
 </html>
