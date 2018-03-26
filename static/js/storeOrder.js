@@ -6,6 +6,9 @@ var landingUrl = "http://localhost:9000/store/landing.html";
 var getOrdersUrl = "http://localhost:8080/store/order/";
 var noOrderDiv = "<div class='text-white'>無訂單</div>";
 var storeHomeUrl = "http://localhost:9000/store/home.html";
+var confirmOrderUrl = "http://localhost:8080/store/order/confirm";
+var finishOrderUrl = "http://localhost:8080/store/order/finish";
+var blackListUrl = "http://localhost:8080/store/order/blackList";
 
 $(document).ready(function() {
     checkLoginStatus();
@@ -53,19 +56,12 @@ function splitPayload() {
 }
 
 function showOrders() {
+    showOrderedOrder();
+    setConfirmOrderButtonClickEventListener();
     showUnfinishedOrder();
-    $('div.item.text-white').click(function(e) {
-        e.stopPropagation();
-        var orderType = $(this).attr('data-tab');
-        alert(orderType);
-        if (orderType == "ordered") {
-            showOrderedOrder();
-        } else if (orderType == "unfinished") {
-            showUnfinishedOrder();
-        } else if (orderType == "finished") {
-            showFinishedOrder();
-        }
-    });
+    setFinishOrderButtonClickEventListener();
+    showFinishedOrder();
+    setBlackListButtonClickEventListener();
 }
 
 function showOrderedOrder() {
@@ -123,6 +119,31 @@ function showOrderedOrder() {
     } else {
         $('div.ui.tab[data-tab="ordered"').append(noOrderDiv);
     }
+}
+
+function setConfirmOrderButtonClickEventListener() {
+    $('button.confirmOrderButton').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url : confirmOrderUrl,
+            type : 'PUT',
+            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+            data : {
+                orderId : $(this).attr('data-order')
+            },
+            success : function(data) {
+                if (data.status == 200) {
+                    storage.removeItem['orderPayload'];
+                    storage.removeItem['orderedOrders'];
+                    storage.removeItem['unfinishedOrders'];
+                    storage.removeItem['finishedOrders']
+                    storage['orderPayload'] = data.orderPayload;
+                    splitPayload();
+                    showOrders();
+                }
+            }
+        });
+    });
 }
 
 function showUnfinishedOrder() {
@@ -228,6 +249,32 @@ function showUnfinishedOrder() {
     }
 }
 
+function setFinishOrderButtonClickEventListener() {
+    $('button.finishOrderButton').click(function(e) {
+        e.preventDefault();
+        console.log($(this).attr('data-order'));
+        $.ajax({
+            url : finishOrderUrl,
+            type : 'PUT',
+            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+            data : {
+                orderId : $(this).attr('data-order')
+            },
+            success : function(data) {
+                if (data.status == 200) {
+                    storage.removeItem['orderPayload'];
+                    storage.removeItem['orderedOrders'];
+                    storage.removeItem['unfinishedOrders'];
+                    storage.removeItem['finishedOrders']
+                    storage['orderPayload'] = data.orderPayload;
+                    splitPayload();
+                    showOrders();
+                }
+            }
+        });
+    });
+}
+
 function showFinishedOrder() {
     var finishedOrderStackableDiv = $('div.ui.tab[data-tab="finished"] > div.ui.stackable.grid');
     if (finishedOrderStackableDiv.children().length > 0) {
@@ -235,7 +282,7 @@ function showFinishedOrder() {
             finishedOrderStackableDiv.children().remove();
         }
     }
-    var unconfirmedUserOrders = jQuery.parseJSON(storage['finishedOrders'])[0].unconfirmd_user_orders;
+    var unconfirmedUserOrders = jQuery.parseJSON(storage['finishedOrders'])[0].unconfirmed_user_orders;
     var finishedOrders = jQuery.parseJSON(storage['finishedOrders'])[1].finished_orders;
     console.log(finishedOrders);
     console.log(unconfirmedUserOrders);
@@ -258,7 +305,7 @@ function showFinishedOrder() {
                     "<div class='eight wide column orderDetail' data-order='" + unconfirmedUserOrder.orderId + "'>" + 
                     "</div>" + 
                     "<div class='four wide center aligned column'>" + 
-                        "<button class='large ui red button custom-font-thin confirmOrderButton' data-order='" + unconfirmedUserOrder.orderId + "'>黑名單</button>" +
+                        "<button class='large ui red button custom-font-thin blackListButton' data-order='" + unconfirmedUserOrder.orderId + "'>黑名單</button>" +
                     "</div>" + 
                 "</div>";
             finishedOrderStackableDiv.append(unconfirmedUserOrderDiv);
@@ -294,7 +341,7 @@ function showFinishedOrder() {
                     "<div class='eight wide column orderDetail' data-order='" + finishedOrder.orderId + "'>" + 
                     "</div>" + 
                     "<div class='four wide center aligned column'>" + 
-                        "<button class='large ui red button custom-font-thin confirmOrderButton' data-order='" + finishedOrder.orderId + "'>黑名單</button>" +
+                        "<button class='large ui red button custom-font-thin blackListButton' data-order='" + finishedOrder.orderId + "'>黑名單</button>" +
                     "</div>" + 
                 "</div>";
             finishedOrderStackableDiv.append(finishedOrderDiv);
@@ -314,6 +361,31 @@ function showFinishedOrder() {
     } else {
         $('div.ui.tab[data-tab="finished"').append(noOrderDiv);
     }
+}
+
+function setBlackListButtonClickEventListener() {
+    $('button.blackListButton').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url : blackListUrl,
+            type : 'PUT',
+            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+            data : {
+                orderId : $(this).attr('data-order')
+            },
+            success : function(data) {
+                if (data.status == 200) {
+                    storage.removeItem['orderPayload'];
+                    storage.removeItem['orderedOrders'];
+                    storage.removeItem['unfinishedOrders'];
+                    storage.removeItem['finishedOrders']
+                    storage['orderPayload'] = data.orderPayload;
+                    splitPayload();
+                    showOrders();
+                }
+            }
+        });
+    });
 }
 
 function setPeriodText(period) {
