@@ -5,10 +5,13 @@ var loginUrl = "http://localhost:9000/auth/login.html";
 var landingUrl = "http://localhost:9000/store/landing.html";
 var getOrdersUrl = "http://localhost:8080/store/order/";
 var noOrderDiv = "<div class='text-white'>無訂單</div>";
+var storeHomeUrl = "http://localhost:9000/store/home.html";
 
 $(document).ready(function() {
     checkLoginStatus();
     setOrders();
+
+    setStoreHomeButtonClickEventListener();
 });
 
 function checkLoginStatus() {
@@ -50,6 +53,7 @@ function splitPayload() {
 }
 
 function showOrders() {
+    showUnfinishedOrder();
     $('div.item.text-white').click(function(e) {
         e.stopPropagation();
         var orderType = $(this).attr('data-tab');
@@ -81,7 +85,7 @@ function showOrderedOrder() {
                 orderNote = "";
             }
             var orderedOrderRowDiv =
-                "<div class=' row orderRow' data-order='" + orderedOrder.orderId + "'>" +
+                "<div class='row orderRow' data-order='" + orderedOrder.orderId + "'>" +
                     "<div class='four wide center aligned column'>" + 
                         "<div class='row'>" +
                             "<p class='ui horizontal bulleted list>" +
@@ -99,7 +103,7 @@ function showOrderedOrder() {
                     "<div class='eight wide column orderDetail' data-order='" + orderedOrder.orderId + "'>" + 
                     "</div>" + 
                     "<div class='four wide center aligned column'>" + 
-                        "<button class='large ui button warning' data-order='" + orderedOrder.orderId + "'>確認接單</button>" +
+                        "<button class='large ui button warning confirmOrderButton' data-order='" + orderedOrder.orderId + "'>確認接單</button>" +
                     "</div>" + 
                 "</div>";
             orderedOrderStackableDiv.append(orderedOrderRowDiv);
@@ -122,10 +126,106 @@ function showOrderedOrder() {
 }
 
 function showUnfinishedOrder() {
+    var unfinishedOrderStackableDiv = $('div.ui.tab[data-tab="unfinished"] > div.ui.stackable.grid');
+    if (unfinishedOrderStackableDiv.children().length > 0) {
+        while(unfinishedOrderStackableDiv.children().length >= 1) {
+            unfinishedOrderStackableDiv.children().remove();
+        }
+    }
     var unfinishedOrders = jQuery.parseJSON(storage['unfinishedOrders'])[0].unfinished_orders;
     var unconfirmedStoreOrders = jQuery.parseJSON(storage['unfinishedOrders'])[1].unconfirmed_store_orders;
     console.log(unfinishedOrders);
-
+    if (unfinishedOrders.length > 0) {
+        for (var key = 0; key < unfinishedOrders.length; key ++) {
+            var unfinishedOrder = unfinishedOrders[key];
+            var orderNote = unfinishedOrder.orderNote;
+            if (orderNote == null) {
+                orderNote = "";
+            }
+            var unfinishedOrderDiv = 
+                "<div class='row orderRow' data-order='" + unfinishedOrder.orderId + "'>" +
+                    "<div class='four wide center aligned column'>" +
+                        "<div class='row'>" +
+                            "<p class='ui horizontal bulleted list'>" +
+                                "<span class='item text-white'>" + unfinishedOrder.orderUserName + "</span>" +
+                                "<span class='item text-white'>" + unfinishedOrder.orderTime + "</span>" +
+                            "</p>" +
+                        "</div>" +
+                        "<div class='row'>" +
+                            "<span class='text-warning'>" + unfinishedOrder.orderUserCellphone + "</span>" +
+                        "</div>" +
+                        "<div class='row'>" +
+                            "<span class='text-warning'>" + orderNote + "</span>" +
+                        "</div>" +
+                    "</div>" +
+                    "<div class='eight wide column orderDetail' data-order='" + unfinishedOrder.orderId + "'>" +
+                    "</div>" +
+                    "<div class='four wide center aligned column'>" +
+                        "<p class='text-white'>" + unfinishedOrder.orderConfirmUserName + "</p>" + 
+                        "<button class='large ui button warning finishOrderButton' data-order='" + unfinishedOrder.orderId + "'>出貨完成</button>" +
+                    "</div>" +
+                "</div>";
+            unfinishedOrderStackableDiv.append(unfinishedOrderDiv);
+            for (var detailKey = 0; detailKey < unfinishedOrder.orderDetails.length; detailKey++) {
+                var unfinishedOrderDetail = unfinishedOrder.orderDetails[detailKey];
+                var unfinishedOrderDetailRowDiv = 
+                    "<div class='row'>" +
+                        "<div class='ui horizontal bulleted list'>" +
+                            "<span class='item text-white'>" + unfinishedOrderDetail.foodName + "</span>" +
+                            "<span class='item text-white'>" + unfinishedOrderDetail.orderQuantity + "</span>" +
+                            "<span class='item text-warning'>NT&dollar;" + unfinishedOrderDetail.foodPrice + "</span>" +
+                        "</div>" +
+                    "</div>";
+                $('div.orderDetail[data-order="' + unfinishedOrder.orderId + '"]').append(unfinishedOrderDetailRowDiv);
+            }
+        }
+    } else if (unconfirmedStoreOrders.length > 0) {
+        for (var key = 0; key < unconfirmedStoreOrders.length; key ++) {
+            var unconfirmedStoreOrder = unconfirmedStoreOrders[key];
+            var orderNote = unconfirmedStoreOrder.orderNote;
+            if (orderNote == null) {
+                orderNote = "";
+            }
+            var unconfirmedStoreOrderDiv = 
+                "<div class='row orderRow' data-order='" + unconfirmedStoreOrder.orderId + "'>" +
+                    "<div class='four wide center aligned column'>" +
+                        "<div class='row'>" +
+                            "<p class='ui horizontal bulleted list'>" +
+                                "<span class='item text-white'>" + unconfirmedStoreOrder.orderUserName + "</span>" +
+                                "<span class='item text-white'>" + unconfirmedStoreOrder.orderTime + "</span>" +
+                            "</p>" +
+                        "</div>" +
+                        "<div class='row'>" +
+                            "<span class='text-warning'>" + unconfirmedStoreOrder.orderUserCellphone + "</span>" +
+                        "</div>" +
+                        "<div class='row'>" +
+                            "<span class='text-warning'>" + orderNote + "</span>" +
+                        "</div>" +
+                    "</div>" +
+                    "<div class='eight wide column orderDetail' data-order='" + unconfirmedStoreOrder.orderId + "'>" +
+                    "</div>" +
+                    "<div class='four wide center aligned column'>" +
+                        "<p class='text-white'>" + unconfirmedStoreOrder.orderConfirmUserName + "</p>" + 
+                        "<button class='large ui button warning finishOrderButton' data-order='" + unconfirmedStoreOrder.orderId + "'>出貨完成</button>" +
+                    "</div>" +
+                "</div>";
+            unfinishedOrderStackableDiv.append(unconfirmedStoreOrderDiv);
+            for (var detailKey = 0; detailKey < unconfirmedStoreOrder.orderDetails.length; detailKey++) {
+                var unconfirmedStoreOrderDetail = unconfirmedStoreOrder.orderDetails[detailKey];
+                var unconfirmedStoreOrderDetailRowDiv = 
+                    "<div class='row'>" +
+                        "<div class='ui horizontal bulleted list'>" +
+                            "<span class='item text-white'>" + unconfirmedStoreOrderDetail.foodName + "</span>" +
+                            "<span class='item text-white'>" + unconfirmedStoreOrderDetail.orderQuantity + "</span>" +
+                            "<span class='item text-warning'>NT&dollar;" + unconfirmedStoreOrderDetail.foodPrice + "</span>" +
+                        "</div>" +
+                    "</div>";
+                $('div.orderDetail[data-order="' + unconfirmedStoreOrder.orderId + '"]').append(unconfirmedStoreOrderDetailRowDiv);
+            }
+        }
+    } else {
+        $('div.ui.tab[data-tab="unfinished"').append(noOrderDiv);
+    }
 }
 
 function showFinishedOrder() {
@@ -240,4 +340,15 @@ function setPeriodText(period) {
         return "";
         break;
     }
+}
+
+function setStoreHomeButtonClickEventListener() {
+    $('#storeHomeButton').click(function(e) {
+        e.preventDefault();
+        storage.removeItem('orderPayload');
+        storage.removeItem('orderedOrders');
+        storage.removeItem('unfinishedOrders');
+        storage.removeItem('finishedOrders');
+        window.location.assign(storeHomeUrl);
+    });
 }
