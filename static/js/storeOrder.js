@@ -136,7 +136,7 @@ function showUnfinishedOrder() {
     var unconfirmedStoreOrders = jQuery.parseJSON(storage['unfinishedOrders'])[1].unconfirmed_store_orders;
     console.log(unfinishedOrders);
     if (unfinishedOrders.length > 0) {
-        for (var key = 0; key < unfinishedOrders.length; key ++) {
+        for (var key = 0; key < unfinishedOrders.length; key++) {
             var unfinishedOrder = unfinishedOrders[key];
             var orderNote = unfinishedOrder.orderNote;
             if (orderNote == null) {
@@ -180,7 +180,7 @@ function showUnfinishedOrder() {
             }
         }
     } else if (unconfirmedStoreOrders.length > 0) {
-        for (var key = 0; key < unconfirmedStoreOrders.length; key ++) {
+        for (var key = 0; key < unconfirmedStoreOrders.length; key++) {
             var unconfirmedStoreOrder = unconfirmedStoreOrders[key];
             var orderNote = unconfirmedStoreOrder.orderNote;
             if (orderNote == null) {
@@ -229,36 +229,90 @@ function showUnfinishedOrder() {
 }
 
 function showFinishedOrder() {
-    var unconfirmedUserOrders = jQuery.parseJSON(storage['finishedOrders'])[0].unconfirmed_user_orders;
+    var finishedOrderStackableDiv = $('div.ui.tab[data-tab="finished"] > div.ui.stackable.grid');
+    if (finishedOrderStackableDiv.children().length > 0) {
+        while(finishedOrderStackableDiv.children().length >= 1) {
+            finishedOrderStackableDiv.children().remove();
+        }
+    }
+    var unconfirmedUserOrders = jQuery.parseJSON(storage['finishedOrders'])[0].unconfirmd_user_orders;
     var finishedOrders = jQuery.parseJSON(storage['finishedOrders'])[1].finished_orders;
     console.log(finishedOrders);
-    for (var key = 0; key < finishedOrders.length; key++) {
-        period = setPeriodText(finishedOrders[key].orderTakeoutPeriod);
-        var finishedOrderRowDiv = 
-            "<div class='row orderRow' data-order='" + finishedOrders[key].orderId + "'>" +
-                "<div class='four wide center aligned column'>" +
+    console.log(unconfirmedUserOrders);
+    if (unconfirmedUserOrders.length > 0) {
+        for (var key = 0; key < unconfirmedUserOrders.length; key++) {
+            var unconfirmedUserOrder = unconfirmedUserOrders[key];
+            var unconfirmedUserOrderDiv = 
+                "<div class='row orderRow' data-order='" + unconfirmedUserOrder.orderId + "'>" +
+                    "<div class='four wide center aligned column'>" + 
+                        "<div class='row'>" +
+                            "<p class='ui horizontal bulleted list>" +
+                                "<span class='item text-white'>" + unconfirmedUserOrder.orderUserName + "</span>" +
+                                "<span class='item text-white'>" + unconfirmedUserOrder.orderTime + "</span>" +
+                            "</p>" +
+                        "</div>" +
+                        "<div class='row'>" +
+                            "<span class='text-warning'>" + unconfirmedUserOrder.orderUserCellphone + "</span>" +
+                        "</div>" +
+                    "</div>" + 
+                    "<div class='eight wide column orderDetail' data-order='" + unconfirmedUserOrder.orderId + "'>" + 
+                    "</div>" + 
+                    "<div class='four wide center aligned column'>" + 
+                        "<button class='large ui red button custom-font-thin confirmOrderButton' data-order='" + unconfirmedUserOrder.orderId + "'>黑名單</button>" +
+                    "</div>" + 
+                "</div>";
+            finishedOrderStackableDiv.append(unconfirmedUserOrderDiv);
+            for (var detailKey = 0; detailKey < unconfirmedUserOrder.orderDetails; detailKey++) {
+                var unconfirmedUserOrderDetail = unconfirmedUserOrder.orderDetails[detailKey];
+                var unconfirmedUserOrderDetailRowDiv = 
                     "<div class='row'>" +
-                        "<p class='ui horizontal bulleted list'>" +
-                            "<span class='item text-white'>" + finishedOrders[key].orderUserName +
-                            "</span>" +
-                            "<span class='item text-white'>" + period +
-                            "</span>" +
-                        "</p>" + 
-                    "</div>" +
+                        "<div class='ui horizontal bulleted list'>" +
+                            "<span class='item text-white'>" + unconfirmedUserOrderDetail.foodName + "</span>" +
+                            "<span class='item text-white'>" + unconfirmedUserOrderDetail.orderQuantity + "</span>" +
+                            "<span class='item text-warning'>NT&dollar;" + unconfirmedUserOrderDetail.foodPrice + "</span>" +
+                        "</div>" +
+                    "</div>";
+                $('div.orderDetail[data-order="' + unconfirmedUserOrder.orderId + '"]').append(unconfirmedUserOrderDetailRowDiv);
+            }
+        }
+    } else if (finishedOrders.length > 0) {
+        for (var key = 0; key < finishedOrders.length; key++) {
+            var finishedOrder = finishedOrders[key];
+            var finishedOrderDiv = 
+                "<div class='row orderRow' data-order='" + finishedOrder.orderId + "'>" +
+                    "<div class='four wide center aligned column'>" + 
+                        "<div class='row'>" +
+                            "<p class='ui horizontal bulleted list>" +
+                                "<span class='item text-white'>" + finishedOrder.orderUserName + "</span>" +
+                                "<span class='item text-white'>" + finishedOrder.orderTime + "</span>" +
+                            "</p>" +
+                        "</div>" +
+                        "<div class='row'>" +
+                            "<span class='text-warning'>" + finishedOrder.orderUserCellphone + "</span>" +
+                        "</div>" +
+                    "</div>" + 
+                    "<div class='eight wide column orderDetail' data-order='" + finishedOrder.orderId + "'>" + 
+                    "</div>" + 
+                    "<div class='four wide center aligned column'>" + 
+                        "<button class='large ui red button custom-font-thin confirmOrderButton' data-order='" + finishedOrder.orderId + "'>黑名單</button>" +
+                    "</div>" + 
+                "</div>";
+            finishedOrderStackableDiv.append(finishedOrderDiv);
+            for (var detailKey = 0; detailKey < finishedOrder.orderDetails; detailKey++) {
+                var finishedOrderDetail = finishedOrder.orderDetails[detailKey];
+                var finishedOrderDetailRowDiv = 
                     "<div class='row'>" +
-                        "<span class='text-watning'>" + finishedOrders[key].orderUserCellphone + "</span>" +
-                    "</div>" +
-                    "<div class='row'>" +
-                    "<span class='text-watning'>" + finishedOrders[key].orderNote + "</span>" +
-                    "</div>" +
-                "</div>" +
-                "<div class='eight wide column'>" +
-                "</div>" +
-                "<div class='four wide center aligned column'>" +
-                    "<p class='text-white'>" + finishedOrders[key].orderConfirmUserName + "</p>" +
-                    "<button data-order='" + finishedOrders[key].orderId + "' class='large ui button warning'>出貨完成</button>" +
-                "</div>" + 
-            "</div>";
+                        "<div class='ui horizontal bulleted list'>" +
+                            "<span class='item text-white'>" + finishedOrderDetail.foodName + "</span>" +
+                            "<span class='item text-white'>" + finishedOrderDetail.orderQuantity + "</span>" +
+                            "<span class='item text-warning'>NT&dollar;" + finishedOrderDetail.foodPrice + "</span>" +
+                        "</div>" +
+                    "</div>";
+                $('div.orderDetail[data-order="' + finishedOrder.orderId + '"]').append(finishedOrderDetailRowDiv);
+            }
+        }
+    } else {
+        $('div.ui.tab[data-tab="finished"').append(noOrderDiv);
     }
 }
 
