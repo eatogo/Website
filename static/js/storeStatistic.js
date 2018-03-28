@@ -1,9 +1,12 @@
+var apiUrl = "http://localhost:8080/";
+var websiteUrl = "http://localhost:9000";
+
 var storage = sessionStorage;
 var UID = storage['auth'];
-var authUrl = "http://localhost:8080/member/auth/";
-var loginUrl = "http://localhost:9000/auth/login.html";
-var getLikesUrl = "http://localhost:8080/store/statistic/likes/";
-var getFavoritesUrl = "http://localhost:8080/store/statistic/favorites/";
+var authUrl = apiUrl + "member/auth/";
+var getLikesUrl = apiUrl + "store/statistic/likes/";
+var getFavoritesUrl = apiUrl + "store/statistic/favorites/";
+var loginUrl = websiteUrl + "/auth/login.html";
 
 $(document).ready(function() {
     checkLoginStatus();

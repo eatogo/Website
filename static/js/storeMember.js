@@ -1,12 +1,15 @@
+var apiUrl = "http://localhost:8080/";
+var websiteUrl = "http://localhost:9000";
+
 var storage = sessionStorage;
 var UID = storage['auth'];
-var authUrl = "http://localhost:8080/member/auth/";
-var loginUrl = "http://localhost:9000/auth/login.html";
-var getEmployeeUrl = "http://localhost:8080/store/authorization/";
-var storeMemberUrl = "http://localhost:9000/store/authorization/member.html";
-var deleteEmployeeUrl = "http://localhost:8080/store/authorization/";
-var createEmployeeUrl = "http://localhost:8080/store/authorization/";
-var storeHomeUrl = "http://localhost:9000/store/home.html";
+var authUrl = apiUrl + "member/auth/";
+var getEmployeeUrl = apiUrl + "store/authorization/";
+var deleteEmployeeUrl = apiUrl + "store/authorization/";
+var createEmployeeUrl = apiUrl + "store/authorization/";
+var loginUrl = websiteUrl + "/auth/login.html";
+var storeMemberUrl = websiteUrl + "/store/authorization/member.html";
+var storeHomeUrl = websiteUrl + "/store/home.html";
 
 $(document).ready(function() {
     checkLoginStatus();

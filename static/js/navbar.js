@@ -1,5 +1,10 @@
+var apiUrl = "http://localhost:8080/";
+var websiteUrl = "http://localhost:9000";
+
 var storage = sessionStorage;
 var UID = storage['auth'];
+var logoutUrl = apiUrl + "member/auth/";
+var indexUrl = websiteUrl + "/index.html";
 var loginButton = $('#loginButton');
 var storeManagementDiv = 
     '<div class="mobile-item item custom-mobile-hide">' + 
@@ -19,8 +24,6 @@ var loggedInDiv =
         '</div>' + 
     '</div>';
 var defaultAvatar = "/static/images/defaultAvatar.png";
-var logoutUrl = "http://localhost:8080/member/auth";
-var indexUrl = "http://localhost:9000/index.html";
 var navbarMenuIcon = $('.ui.toggle.icon');
 var navbarMenuItem = $('.mobile-item');
 var mainContainer = $('.ui.main.container');
@@ -65,7 +68,7 @@ function setLogoutButtonClickEventListener() {
     var logoutButton = $('#logoutButton');
     logoutButton.click(function() {
         $.ajax({
-            url : logoutUrl + "/" + UID,
+            url : logoutUrl + UID,
             type : 'DELETE',
             contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
             success : function(data) {

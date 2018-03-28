@@ -1,12 +1,15 @@
+var apiUrl = "http://localhost:8080/";
+var websiteUrl = "http://localhost:9000";
+
 var storage = sessionStorage;
 var UID = storage['auth'];
-var loginUrl = "http://localhost:9000/auth/login.html";
 var storeId = storage['storeId'];
-var landingUrl = "http://localhost:9000/store/landing.html"
-var menuUrl = "http://localhost:8080/store/menu";
+var menuUrl = apiUrl + "store/menu/";
+var loginUrl = websiteUrl + "/auth/login.html";
+var landingUrl = websiteUrl + "/store/landing.html"
+var editFoodUrl = websiteUrl + "/store/menu/edit.html";
 var menuListDiv = $('#menuListDiv');
 var menuDivider = "<div class='ui divider'></div>";
-var editFoodUrl = "http://localhost:9000/store/menu/edit.html";
 
 $(document).ready(function() {
     checkLoginStatus();
@@ -28,7 +31,7 @@ function setMenu() {
 }
 
 function getMenuInfoAndDisplay() {
-    $.get(menuUrl + "/" + storeId, {}, function(data) {
+    $.get(menuUrl + storeId, {}, function(data) {
         if (data.status == 200) {
             console.log(data.menuPayload);
             storage['menuPayload'] = data.menuPayload;

@@ -1,9 +1,12 @@
+var apiUrl = "http://localhost:8080/";
+var websiteUrl = "http://localhost:9000";
+
 var storage = sessionStorage;
 var UID = storage['auth'];
-var authUrl = "http://localhost:8080/member/auth";
-var storeLandingUrl = "http://localhost:9000/store/landing.html";
+var authUrl = apiUrl + "member/auth/";
+var signupUrl = apiUrl + "member/signup";
+var storeLandingUrl = websiteUrl + "/store/landing.html";
 var signupButton = $('#signupButton');
-var signupUrl = "http://localhost:8080/member/signup";
 var signupForm = $('.ui.form');
 var signupName = $('#signupName');
 var signupCellphone = $('#signupCellphone');
@@ -20,7 +23,7 @@ $(document).ready(function () {
 
 function checkLoginStatus() {
     if (UID) {
-        $.get(authUrl + "/" + UID, {}, function(data) {
+        $.get(authUrl + UID, {}, function(data) {
             if (data.status == 200) {
                 storage['userName'] = data.user.userName;
                 storage['userAvatar'] = data.user.userAvatar;

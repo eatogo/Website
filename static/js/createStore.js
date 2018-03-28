@@ -1,12 +1,17 @@
+var apiUrl = "http://localhost:8080/";
+var websiteUrl = "http://localhost:9000";
+var geocodingKey = "AIzaSyATgrc7VameHyfmHjOKh7ldTiwuag6uxCc";
+
 var storage = sessionStorage;
 var UID = storage['auth'];
 var userId = storage['userId'];
-var authUrl = "http://localhost:8080/member/auth";
-var storeLandingUrl = "http://localhost:9000/store/landing.html";
-var loginUrl = "http://localhost:9000/auth/login.html";
+var authUrl = apiUrl + "member/auth/";
+var createStoreUrl = apiUrl + "store/landing/";
+var storeLandingUrl = websiteUrl + "/store/landing.html";
+var loginUrl = websiteUrl + "/auth/login.html";
+var geocodingBaseUrl = "https://maps.googleapis.com/maps/api/geocode/";
 var createStoreForm = $('.ui.form');
 var createStoreButton = $('#createStoreButton');
-var createStoreUrl = "http://localhost:8080/store/landing";
 var storeNameInput = $('#storeName');
 var storeAddressInput = $('#storeAddress');
 var storePhoneInput = $('#storePhone');
@@ -25,7 +30,7 @@ $(document).ready(function() {
 
 function checkLoginStatus() {
     if (UID) {
-        $.get(authUrl + "/" + UID, {}, function(data) {
+        $.get(authUrl + UID, {}, function(data) {
             if (data.status == 200) {
                 storage['userName'] = data.user.userName;
                 storage['userAvatar'] = data.user.userAvatar;
@@ -111,7 +116,7 @@ function setSubmitButtonClickEventListener() {
 }
 
 function getStoreLatLngAndCreateStore() {
-    geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + storeAddressInput.val() + "&key=AIzaSyATgrc7VameHyfmHjOKh7ldTiwuag6uxCc";
+    geocodingUrl = geocodingBaseUrl + "json?address=" + storeAddressInput.val() + "&key=" + geocodingKey;
     $.get(geocodingUrl, {}, function(data) {
         console.log(data.status);
         if (data.status == "OK") {
@@ -125,8 +130,9 @@ function getStoreLatLngAndCreateStore() {
 
 function createStore() {
     $.ajax({
-        url: createStoreUrl + "/" + userId,
+        url: createStoreUrl + userId,
         type: 'POST',
+        contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
         data: {
             storeName : storeNameInput.val(),
             storeAddress : storeAddressInput.val(),
@@ -139,7 +145,6 @@ function createStore() {
             storeOperateType : storeOperateTypeInput.dropdown('get value'),
             storeIntro : storeIntroInput.val()
         },
-        contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
         success: function(data) {
             alert('success');
             window.location.assign(storeLandingUrl);

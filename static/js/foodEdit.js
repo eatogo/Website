@@ -1,9 +1,13 @@
+var apiUrl = "http://localhost:8080/";
+var websiteUrl = "http://localhost:9000";
+
 var storage = sessionStorage;
 var UID = storage['auth'];
-var authUrl = "http://localhost:8080/member/auth"
-var loginUrl = "http://localhost:9000/auth/login.html";
-var foodInfoUrl = "http://localhost:8080/store/menu/food";
-var storeHomeUrl = "http://localhost:9000/store/home.html";
+var authUrl = apiUrl + "member/auth/"
+var foodInfoUrl = apiUrl + "store/menu/food/";
+var editFoodUrl = apiUrl + "store/menu/food/"
+var loginUrl = websiteUrl + "/auth/login.html";
+var storeHomeUrl = websiteUrl + "/store/home.html";
 
 $(document).ready(function() {
     checkLoginStatus();
@@ -14,7 +18,7 @@ $(document).ready(function() {
 
 function checkLoginStatus() {
     if (UID) {
-        $.get(authUrl + "/" + UID, {}, function(data) {
+        $.get(authUrl + UID, {}, function(data) {
             if (data.status != 200) {
                 storage.clear();
                 window.location.assign(loginUrl);
@@ -26,7 +30,7 @@ function checkLoginStatus() {
 }
 
 function setFoodInfo() {
-    $.get(foodInfoUrl + "/" + storage['foodId'], {}, function(data) {
+    $.get(foodInfoUrl + storage['foodId'], {}, function(data) {
         if (data.status == 200) {
             storage['foodPayload'] = data.foodPayload;
             console.log(storage['foodPayload']);
@@ -45,12 +49,12 @@ function displayFoodInfo() {
 }
 
 function setSubmitButtonClickEventListener() {
-    var editFoodUrl = "http://localhost:8080/store/menu/food"
+    
     var submitType;
     if (storage['foodId']) {
         submitType = 'PUT';
     } else {
-        editFoodUrl += "/" + storage['storeId'];
+        editFoodUrl += storage['storeId'];
         submitType = 'POST';
     }
     $('#submitButton').click(function () {

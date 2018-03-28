@@ -1,14 +1,17 @@
+var apiUrl = "http://localhost:8080/";
+var websiteUrl = "http://localhost:9000";
+
 var storage = sessionStorage;
 var UID = storage['auth'];
-var authUrl = "http://localhost:8080/member/auth";
-var storeLandingUrl = "http://localhost:9000/store/landing.html";
+var authUrl = apiUrl + "member/auth/";
+var loginUrl = apiUrl + "member/login/";
+var storeAuthUrl = apiUrl + "store/landing/";
+var storeLandingUrl = websiteUrl + "/store/landing.html";
 var loginButton = $('#loginButton');
 var loginForm = $('.ui.form');
-var loginUrl = "http://localhost:8080/member/login";
 var loginCellphone = $('#userCellphone');
 var loginPassword = $('#userPassword');
 var errorMessageDiv = $('.ui.error.message');
-var storeAuthUrl = "http://localhost:8080/store/landing"
 
 $(document).ready(function () {
     checkLoginStatus();
@@ -18,7 +21,7 @@ $(document).ready(function () {
 
 function checkLoginStatus() {
     if (UID) {
-        $.get(authUrl + "/" + UID, {}, function(data) {
+        $.get(authUrl + UID, {}, function(data) {
             if (data.status == 200) {
                 storage['userName'] = data.user.userName;
                 storage['userAvatar'] = data.user.userAvatar;
@@ -65,23 +68,18 @@ function setSubmitButtonClickEventListener() {
     loginButton.click(function (e) {
         e.preventDefault();
         if(loginForm.form('is valid')) {
-            $.ajax({
-                url : loginUrl + "/" + loginCellphone.val() + "/" + loginPassword.val(),
-                type : 'GET',
-                contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-                success: function(data) {
-                    if (data.status == 200) {
-                        clearErrorMessage();
-                        storage['userId'] = data.auth.userId;
-                        storage['auth'] = data.auth.userUuid;
-                        storage['userName'] = data.user.userName;
-                        storage['userAvatar'] = data.user.userAvatar;
-                        getStoreAuthInfos();
-                        window.location.assign(storeLandingUrl);
-                    } else {
-                        setErrorMessage();
-                        return false;
-                    }
+            $.get(loginUrl + loginCellphone.val() + "/" + loginPassword.val(), {}, function(data) {
+                if (data.status == 200) {
+                    clearErrorMessage();
+                    storage['userId'] = data.auth.userId;
+                    storage['auth'] = data.auth.userUuid;
+                    storage['userName'] = data.user.userName;
+                    storage['userAvatar'] = data.user.userAvatar;
+                    getStoreAuthInfos();
+                    window.location.assign(storeLandingUrl);
+                } else {
+                    setErrorMessage();
+                    return false;
                 }
             });
         }
@@ -103,7 +101,7 @@ function clearErrorMessage() {
 }
 
 function getStoreAuthInfos() {
-    $.get(storeAuthUrl + "/" + storage['userId'], {}, function(data) {
+    $.get(storeAuthUrl + storage['userId'], {}, function(data) {
         if (data.status == 200) {
             storage['payload'] = data.payload;
         }

@@ -1,14 +1,17 @@
+var apiUrl = "http://localhost:8080/";
+var websiteUrl = "http://localhost:9000";
+
 var storage = sessionStorage;
 var UID = storage['auth'];
-var authUrl = "http://localhost:8080/member/auth/";
-var loginUrl = "http://localhost:9000/auth/login.html";
-var landingUrl = "http://localhost:9000/store/landing.html";
-var getOrdersUrl = "http://localhost:8080/store/order/";
+var authUrl = apiUrl + "member/auth/";
+var getOrdersUrl = apiUrl + "store/order/";
+var confirmOrderUrl = apiUrl + "store/order/confirm";
+var finishOrderUrl = apiUrl + "store/order/finish";
+var blackListUrl = apiUrl + "store/order/blackList";
+var loginUrl = websiteUrl + "/auth/login.html";
+var landingUrl = websiteUrl + "/store/landing.html";
+var storeHomeUrl = websiteUrl + "/store/home.html";
 var noOrderDiv = "<div class='text-white'>無訂單</div>";
-var storeHomeUrl = "http://localhost:9000/store/home.html";
-var confirmOrderUrl = "http://localhost:8080/store/order/confirm";
-var finishOrderUrl = "http://localhost:8080/store/order/finish";
-var blackListUrl = "http://localhost:8080/store/order/blackList";
 
 $(document).ready(function() {
     checkLoginStatus();
@@ -35,7 +38,6 @@ function setOrders() {
     if (storage['storeId']) {
         $.get(getOrdersUrl + storage['storeId'], {}, function(data) {
             if (data.status == 200) {
-                console.log(data.orderPayload);
                 storage['orderPayload'] = data.orderPayload;
                 splitPayload();
                 showOrders();
@@ -66,13 +68,8 @@ function showOrders() {
 
 function showOrderedOrder() {
     var orderedOrderStackableDiv = $('div.ui.tab[data-tab="ordered"] > div.ui.stackable.grid');
-    if (orderedOrderStackableDiv.children().length > 0) {
-        while(orderedOrderStackableDiv.children().length >= 1) {
-            orderedOrderStackableDiv.children().remove();
-        }
-    }
+    removeChildrenOfDiv(orderedOrderStackableDiv);
     var orderedOrders = jQuery.parseJSON(storage['orderedOrders'])[0].ordered_orders;
-    console.log(orderedOrders);
     if (orderedOrders.length > 0) {
         for (var key = 0; key < orderedOrders.length; key++) {
             var orderedOrder = orderedOrders[key];
@@ -84,9 +81,9 @@ function showOrderedOrder() {
                 "<div class='row orderRow' data-order='" + orderedOrder.orderId + "'>" +
                     "<div class='four wide center aligned column'>" + 
                         "<div class='row'>" +
-                            "<p class='ui horizontal bulleted list>" +
+                            "<p class='ui horizontal bulleted list'>" +
                                 "<span class='item text-white'>" + orderedOrder.orderUserName + "</span>" +
-                                "<span class='item text-white'>" + orderedOrder.orderTime + "</span>" +
+                                "<span class='item text-white'>" + new Date(orderedOrder.orderTime).toLocaleDateString() + "</span>" +
                             "</p>" +
                         "</div>" +
                         "<div class='row'>" +
@@ -117,7 +114,7 @@ function showOrderedOrder() {
             }
         }
     } else {
-        $('div.ui.tab[data-tab="ordered"').append(noOrderDiv);
+        orderedOrderStackableDiv.append(noOrderDiv);
     }
 }
 
@@ -148,14 +145,9 @@ function setConfirmOrderButtonClickEventListener() {
 
 function showUnfinishedOrder() {
     var unfinishedOrderStackableDiv = $('div.ui.tab[data-tab="unfinished"] > div.ui.stackable.grid');
-    if (unfinishedOrderStackableDiv.children().length > 0) {
-        while(unfinishedOrderStackableDiv.children().length >= 1) {
-            unfinishedOrderStackableDiv.children().remove();
-        }
-    }
+    removeChildrenOfDiv(unfinishedOrderStackableDiv);
     var unfinishedOrders = jQuery.parseJSON(storage['unfinishedOrders'])[0].unfinished_orders;
     var unconfirmedStoreOrders = jQuery.parseJSON(storage['unfinishedOrders'])[1].unconfirmed_store_orders;
-    console.log(unfinishedOrders);
     if (unfinishedOrders.length > 0) {
         for (var key = 0; key < unfinishedOrders.length; key++) {
             var unfinishedOrder = unfinishedOrders[key];
@@ -169,7 +161,7 @@ function showUnfinishedOrder() {
                         "<div class='row'>" +
                             "<p class='ui horizontal bulleted list'>" +
                                 "<span class='item text-white'>" + unfinishedOrder.orderUserName + "</span>" +
-                                "<span class='item text-white'>" + unfinishedOrder.orderTime + "</span>" +
+                                "<span class='item text-white'>" + new Date(unfinishedOrder.orderTime).toLocaleDateString() + "</span>" +
                             "</p>" +
                         "</div>" +
                         "<div class='row'>" +
@@ -213,7 +205,7 @@ function showUnfinishedOrder() {
                         "<div class='row'>" +
                             "<p class='ui horizontal bulleted list'>" +
                                 "<span class='item text-white'>" + unconfirmedStoreOrder.orderUserName + "</span>" +
-                                "<span class='item text-white'>" + unconfirmedStoreOrder.orderTime + "</span>" +
+                                "<span class='item text-white'>" + new Date(unconfirmedStoreOrder.orderTime).toLocaleDateString() + "</span>" +
                             "</p>" +
                         "</div>" +
                         "<div class='row'>" +
@@ -245,14 +237,13 @@ function showUnfinishedOrder() {
             }
         }
     } else {
-        $('div.ui.tab[data-tab="unfinished"').append(noOrderDiv);
+        unfinishedOrderStackableDiv.append(noOrderDiv);
     }
 }
 
 function setFinishOrderButtonClickEventListener() {
     $('button.finishOrderButton').click(function(e) {
         e.preventDefault();
-        console.log($(this).attr('data-order'));
         $.ajax({
             url : finishOrderUrl,
             type : 'PUT',
@@ -277,39 +268,33 @@ function setFinishOrderButtonClickEventListener() {
 
 function showFinishedOrder() {
     var finishedOrderStackableDiv = $('div.ui.tab[data-tab="finished"] > div.ui.stackable.grid');
-    if (finishedOrderStackableDiv.children().length > 0) {
-        while(finishedOrderStackableDiv.children().length >= 1) {
-            finishedOrderStackableDiv.children().remove();
-        }
-    }
+    removeChildrenOfDiv(finishedOrderStackableDiv);
     var unconfirmedUserOrders = jQuery.parseJSON(storage['finishedOrders'])[0].unconfirmed_user_orders;
     var finishedOrders = jQuery.parseJSON(storage['finishedOrders'])[1].finished_orders;
-    console.log(finishedOrders);
-    console.log(unconfirmedUserOrders);
     if (unconfirmedUserOrders.length > 0) {
         for (var key = 0; key < unconfirmedUserOrders.length; key++) {
             var unconfirmedUserOrder = unconfirmedUserOrders[key];
+            var orderTime = new Date(unconfirmedUserOrder.orderTime).toLocaleDateString();
             var unconfirmedUserOrderDiv = 
                 "<div class='row orderRow' data-order='" + unconfirmedUserOrder.orderId + "'>" +
                     "<div class='four wide center aligned column'>" + 
                         "<div class='row'>" +
-                            "<p class='ui horizontal bulleted list>" +
+                            "<p class='ui horizontal bulleted list'>" +
                                 "<span class='item text-white'>" + unconfirmedUserOrder.orderUserName + "</span>" +
-                                "<span class='item text-white'>" + unconfirmedUserOrder.orderTime + "</span>" +
+                                "<span class='item text-white'>" + orderTime + "</span>" +
                             "</p>" +
                         "</div>" +
                         "<div class='row'>" +
                             "<span class='text-warning'>" + unconfirmedUserOrder.orderUserCellphone + "</span>" +
                         "</div>" +
                     "</div>" + 
-                    "<div class='eight wide column orderDetail' data-order='" + unconfirmedUserOrder.orderId + "'>" + 
-                    "</div>" + 
+                    "<div class='eight wide column orderDetail' data-order='" + unconfirmedUserOrder.orderId + "'></div>" + 
                     "<div class='four wide center aligned column'>" + 
                         "<button class='large ui red button custom-font-thin blackListButton' data-order='" + unconfirmedUserOrder.orderId + "'>黑名單</button>" +
                     "</div>" + 
                 "</div>";
             finishedOrderStackableDiv.append(unconfirmedUserOrderDiv);
-            for (var detailKey = 0; detailKey < unconfirmedUserOrder.orderDetails; detailKey++) {
+            for (var detailKey = 0; detailKey < unconfirmedUserOrder.orderDetails.length; detailKey++) {
                 var unconfirmedUserOrderDetail = unconfirmedUserOrder.orderDetails[detailKey];
                 var unconfirmedUserOrderDetailRowDiv = 
                     "<div class='row'>" +
@@ -325,27 +310,27 @@ function showFinishedOrder() {
     } else if (finishedOrders.length > 0) {
         for (var key = 0; key < finishedOrders.length; key++) {
             var finishedOrder = finishedOrders[key];
+            var orderTime = new Date(finishedOrder.orderTime).toLocaleDateString();
             var finishedOrderDiv = 
                 "<div class='row orderRow' data-order='" + finishedOrder.orderId + "'>" +
                     "<div class='four wide center aligned column'>" + 
                         "<div class='row'>" +
-                            "<p class='ui horizontal bulleted list>" +
+                            "<p class='ui horizontal bulleted list'>" +
                                 "<span class='item text-white'>" + finishedOrder.orderUserName + "</span>" +
-                                "<span class='item text-white'>" + finishedOrder.orderTime + "</span>" +
+                                "<span class='item text-white'>" + orderTime + "</span>" +
                             "</p>" +
                         "</div>" +
                         "<div class='row'>" +
                             "<span class='text-warning'>" + finishedOrder.orderUserCellphone + "</span>" +
                         "</div>" +
                     "</div>" + 
-                    "<div class='eight wide column orderDetail' data-order='" + finishedOrder.orderId + "'>" + 
-                    "</div>" + 
+                    "<div class='eight wide column orderDetail' data-order='" + finishedOrder.orderId + "'></div>" + 
                     "<div class='four wide center aligned column'>" + 
                         "<button class='large ui red button custom-font-thin blackListButton' data-order='" + finishedOrder.orderId + "'>黑名單</button>" +
                     "</div>" + 
                 "</div>";
             finishedOrderStackableDiv.append(finishedOrderDiv);
-            for (var detailKey = 0; detailKey < finishedOrder.orderDetails; detailKey++) {
+            for (var detailKey = 0; detailKey < finishedOrder.orderDetails.length; detailKey++) {
                 var finishedOrderDetail = finishedOrder.orderDetails[detailKey];
                 var finishedOrderDetailRowDiv = 
                     "<div class='row'>" +
@@ -359,7 +344,7 @@ function showFinishedOrder() {
             }
         }
     } else {
-        $('div.ui.tab[data-tab="finished"').append(noOrderDiv);
+        finishedOrderStackableDiv.append(noOrderDiv);
     }
 }
 
@@ -386,6 +371,14 @@ function setBlackListButtonClickEventListener() {
             }
         });
     });
+}
+
+function removeChildrenOfDiv(parentDiv) {
+    if (parentDiv.children().length > 0) {
+        while (parentDiv.children().length >= 1) {
+            parentDiv.children().remove();
+        }
+    }
 }
 
 function setPeriodText(period) {
@@ -471,7 +464,6 @@ function setPeriodText(period) {
 function setStoreHomeButtonClickEventListener() {
     $('#storeHomeButton').click(function(e) {
         e.preventDefault();
-        storage.removeItem('orderPayload');
         storage.removeItem('orderedOrders');
         storage.removeItem('unfinishedOrders');
         storage.removeItem('finishedOrders');

@@ -1,6 +1,13 @@
+var apiUrl = "http://localhost:8080/";
+var websiteUrl = "http://localhost:9000";
+
 var storage = sessionStorage;
 var UID = storage['auth'];
-var loginUrl = "http://localhost:9000/auth/login.html";
+var logoutUrl = apiUrl + "member/auth";
+var storeAuthUrl = apiUrl + "store/landing/"
+var loginUrl = websiteUrl + "/auth/login.html";
+var indexUrl = websiteUrl + "/index.html";
+var storeHomeUrl = websiteUrl + "/store/home.html";
 var navbar = $('.ui.secondary.stackable.menu');
 var loggedInDiv = 
     '<div class="mobile-item custom-mobile-hide right menu" hidden>' + 
@@ -15,15 +22,11 @@ var loggedInDiv =
         '</div>' + 
     '</div>';
 var defaultAvatar = "/static/images/defaultAvatar.png";
-var logoutUrl = "http://localhost:8080/member/auth";
-var indexUrl = "http://localhost:9000/index.html";
 var navbarMenuIcon = $('.ui.toggle.icon');
 var navbarMenuItem = $('.mobile-item');
 var mainContainer = $('.ui.main.container');
-var storeAuthUrl = "http://localhost:8080/store/landing"
 var storeDivider = '<div class="ui divider"></div>';
 var storeListDiv = $('#storeListDiv');
-var storeHomeUrl = "http://localhost:9000/store/home.html";
 
 $(document).ready(function() {
     clearStoreId();
@@ -97,7 +100,7 @@ function setCollapsableNavbarMenu() {
 }
 
 function setStoresDiv() {
-    $.get(storeAuthUrl + "/" + storage['userId'], {}, function(data) {
+    $.get(storeAuthUrl + storage['userId'], {}, function(data) {
         if (data.status == 200) {
             storage['landing'] = data.landing;
             extractPayloadToStoresDiv();
@@ -130,15 +133,16 @@ function setSingleStore(storeInfo) {
     } else {
         storeLogo = "/static/images/" + storeInfo.storeLogo;
     }
+    var storeId = storeInfo['storeId'];
     var singleStoreDiv =
-    '<a class="item" data-storeName="' + storeName + '" data-store="' + storeInfo['storeId'] + '" href="/store/home.html">' +
-        '<div bordered rounded class="ui tiny circular image" data-store="' + storeInfo['storeId'] + '">' +
-            '<img src="' + storeLogo + '" data-store="' + storeInfo['storeId'] + '">' +
-        '</div>' +
-        '<div class="middle aligned content" data-store="' + storeInfo['storeId'] + '">' +
-            '<p class="header text-warning" data-store="' + storeInfo['storeId'] + '">' + storeName + '</p>'+
-        '</div>' +
-    '</a>';
+        '<a class="item" data-storeName="' + storeName + '" data-store="' + storeId + '" href="/store/home.html">' +
+            '<div bordered rounded class="ui tiny circular image" data-store="' + storeId + '">' +
+                '<img src="' + storeLogo + '" data-store="' + storeId + '">' +
+            '</div>' +
+            '<div class="middle aligned content" data-store="' + storeId + '">' +
+                '<p class="header text-warning" data-store="' + storeId + '">' + storeName + '</p>'+
+            '</div>' +
+        '</a>';
     storeListDiv.append(singleStoreDiv);
 }
 

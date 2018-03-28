@@ -1,7 +1,12 @@
+var apiUrl = "http://localhost:8080/";
+var websiteUrl = "http://localhost:9000";
+var geocodingKey = "AIzaSyATgrc7VameHyfmHjOKh7ldTiwuag6uxCc";
+
 var storage = sessionStorage;
 var UID = storage['auth'];
-var loginUrl = "http://localhost:9000/auth/login.html";
-var storeInfoUrl = "http://localhost:8080/store/info"
+var storeInfoUrl = apiUrl + "store/info/"
+var loginUrl = websiteUrl + "/auth/login.html";
+var geocodingBaseUrl = "https://maps.googleapis.com/maps/api/geocode/";
 var storeInfo = storage['storeInfo'];
 var submitButton = $('#submitButton');
 var storeLat, storeLng;
@@ -22,7 +27,7 @@ function setStoreInfo() {
     if (storeInfo) {
         showStoreInfo();
     } else {
-        $.get(storeInfoUrl + "/" + storage['storeId'], {}, function(data) {
+        $.get(storeInfoUrl + storage['storeId'], {}, function(data) {
             if (data.status == 200) {
                 alert('success');
                 storage['storeInfo'] = data.storePayload;
@@ -51,7 +56,7 @@ function setSubmitButtonClickEventListener() {
 }
 
 function getStoreLatLngAndUpdateStore() {
-    geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + $('#storeAddress').val() + "&key=AIzaSyATgrc7VameHyfmHjOKh7ldTiwuag6uxCc";
+    geocodingUrl = geocodingBaseUrl + "json?address=" + $('#storeAddress').val() + "&key=" + geocodingKey;
     $.get(geocodingUrl, {}, function(data) {
         console.log(data.status);
         if (data.status == "OK") {
