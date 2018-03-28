@@ -33,7 +33,6 @@ function setFoodInfo() {
     $.get(foodInfoUrl + storage['foodId'], {}, function(data) {
         if (data.status == 200) {
             storage['foodPayload'] = data.foodPayload;
-            console.log(storage['foodPayload']);
             displayFoodInfo();
         }
     });
@@ -49,7 +48,6 @@ function displayFoodInfo() {
 }
 
 function setSubmitButtonClickEventListener() {
-    
     var submitType;
     if (storage['foodId']) {
         submitType = 'PUT';
@@ -72,7 +70,6 @@ function setSubmitButtonClickEventListener() {
             },
             success : function(data) {
                 if (data.status == 200) {
-                    console.log('successfully edited');
                     storage.removeItem('foodPayload');
                     storage['foodPayload'] = data.foodPayload;
                     displayFoodInfo()

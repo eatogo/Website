@@ -33,7 +33,6 @@ function setMenu() {
 function getMenuInfoAndDisplay() {
     $.get(menuUrl + storeId, {}, function(data) {
         if (data.status == 200) {
-            console.log(data.menuPayload);
             storage['menuPayload'] = data.menuPayload;
             displayMenu();
             setEditFoodButtonClickEventListener();
@@ -99,7 +98,6 @@ function setSingleMenu(menuInfo) {
 
 function setEditFoodButtonClickEventListener() {
     $('a.editButton').click(function(e) {
-        alert('click');
         e.preventDefault();
         storage['foodId'] = $(this).attr('data-foodId');
         storage.removeItem('menuPayload');

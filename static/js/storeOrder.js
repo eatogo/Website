@@ -15,8 +15,11 @@ var noOrderDiv = "<div class='text-white'>無訂單</div>";
 
 $(document).ready(function() {
     checkLoginStatus();
-    setOrders();
-
+    if (storage['orderPayload']) {
+        showOrders();
+    } else {
+        setOrders();
+    }
     setStoreHomeButtonClickEventListener();
 });
 
@@ -39,21 +42,11 @@ function setOrders() {
         $.get(getOrdersUrl + storage['storeId'], {}, function(data) {
             if (data.status == 200) {
                 storage['orderPayload'] = data.orderPayload;
-                splitPayload();
                 showOrders();
             }
         })
     } else {
         window.location.assign(landingUrl);
-    }
-}
-
-function splitPayload() {
-    if (storage['orderPayload'] != "null") {
-        var orderPayload = jQuery.parseJSON(storage['orderPayload']);
-        storage['orderedOrders'] = JSON.stringify(orderPayload.ordered);
-        storage['unfinishedOrders'] = JSON.stringify(orderPayload.unfinished);
-        storage['finishedOrders'] = JSON.stringify(orderPayload.finished);
     }
 }
 
@@ -68,11 +61,13 @@ function showOrders() {
 
 function showOrderedOrder() {
     var orderedOrderStackableDiv = $('div.ui.tab[data-tab="ordered"] > div.ui.stackable.grid');
+    var orderedOrders = jQuery.parseJSON(storage['orderPayload']).ordered[0].ordered_orders;
+
     removeChildrenOfDiv(orderedOrderStackableDiv);
-    var orderedOrders = jQuery.parseJSON(storage['orderedOrders'])[0].ordered_orders;
     if (orderedOrders.length > 0) {
         for (var key = 0; key < orderedOrders.length; key++) {
             var orderedOrder = orderedOrders[key];
+            var orderTime = new Date(orderedOrder.orderTime).toLocaleDateString();
             var orderNote = orderedOrder.orderNote;
             if (orderNote == null) {
                 orderNote = "";
@@ -83,7 +78,7 @@ function showOrderedOrder() {
                         "<div class='row'>" +
                             "<p class='ui horizontal bulleted list'>" +
                                 "<span class='item text-white'>" + orderedOrder.orderUserName + "</span>" +
-                                "<span class='item text-white'>" + new Date(orderedOrder.orderTime).toLocaleDateString() + "</span>" +
+                                "<span class='item text-white'>" + orderTime + "</span>" +
                             "</p>" +
                         "</div>" +
                         "<div class='row'>" +
@@ -145,9 +140,11 @@ function setConfirmOrderButtonClickEventListener() {
 
 function showUnfinishedOrder() {
     var unfinishedOrderStackableDiv = $('div.ui.tab[data-tab="unfinished"] > div.ui.stackable.grid');
+    var unfinishOrders = jQuery.parseJSON(storage['orderPayload']).unfinished;
+    var unfinishedOrders = unfinishOrders[0].unfinished_orders;
+    var unconfirmedStoreOrders = unfinishOrders[1].unconfirmed_store_orders;
+
     removeChildrenOfDiv(unfinishedOrderStackableDiv);
-    var unfinishedOrders = jQuery.parseJSON(storage['unfinishedOrders'])[0].unfinished_orders;
-    var unconfirmedStoreOrders = jQuery.parseJSON(storage['unfinishedOrders'])[1].unconfirmed_store_orders;
     if (unfinishedOrders.length > 0) {
         for (var key = 0; key < unfinishedOrders.length; key++) {
             var unfinishedOrder = unfinishedOrders[key];
@@ -192,7 +189,8 @@ function showUnfinishedOrder() {
                 $('div.orderDetail[data-order="' + unfinishedOrder.orderId + '"]').append(unfinishedOrderDetailRowDiv);
             }
         }
-    } else if (unconfirmedStoreOrders.length > 0) {
+    }
+    if (unconfirmedStoreOrders.length > 0) {
         for (var key = 0; key < unconfirmedStoreOrders.length; key++) {
             var unconfirmedStoreOrder = unconfirmedStoreOrders[key];
             var orderNote = unconfirmedStoreOrder.orderNote;
@@ -236,7 +234,8 @@ function showUnfinishedOrder() {
                 $('div.orderDetail[data-order="' + unconfirmedStoreOrder.orderId + '"]').append(unconfirmedStoreOrderDetailRowDiv);
             }
         }
-    } else {
+    }
+    if (unfinishedOrderStackableDiv.children().length == 0) {
         unfinishedOrderStackableDiv.append(noOrderDiv);
     }
 }
@@ -268,9 +267,11 @@ function setFinishOrderButtonClickEventListener() {
 
 function showFinishedOrder() {
     var finishedOrderStackableDiv = $('div.ui.tab[data-tab="finished"] > div.ui.stackable.grid');
+    var finishOrders = jQuery.parseJSON(storage['orderPayload']).finished;
+    var unconfirmedUserOrders = finishOrders[0].unconfirmed_user_orders;
+    var finishedOrders = finishOrders[1].finished_orders;
+
     removeChildrenOfDiv(finishedOrderStackableDiv);
-    var unconfirmedUserOrders = jQuery.parseJSON(storage['finishedOrders'])[0].unconfirmed_user_orders;
-    var finishedOrders = jQuery.parseJSON(storage['finishedOrders'])[1].finished_orders;
     if (unconfirmedUserOrders.length > 0) {
         for (var key = 0; key < unconfirmedUserOrders.length; key++) {
             var unconfirmedUserOrder = unconfirmedUserOrders[key];
@@ -307,7 +308,8 @@ function showFinishedOrder() {
                 $('div.orderDetail[data-order="' + unconfirmedUserOrder.orderId + '"]').append(unconfirmedUserOrderDetailRowDiv);
             }
         }
-    } else if (finishedOrders.length > 0) {
+    }
+    if (finishedOrders.length > 0) {
         for (var key = 0; key < finishedOrders.length; key++) {
             var finishedOrder = finishedOrders[key];
             var orderTime = new Date(finishedOrder.orderTime).toLocaleDateString();
@@ -343,7 +345,8 @@ function showFinishedOrder() {
                 $('div.orderDetail[data-order="' + finishedOrder.orderId + '"]').append(finishedOrderDetailRowDiv);
             }
         }
-    } else {
+    }
+    if (finishedOrderStackableDiv.children().length == 0) {
         finishedOrderStackableDiv.append(noOrderDiv);
     }
 }

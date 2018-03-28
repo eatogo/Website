@@ -118,9 +118,7 @@ function setSubmitButtonClickEventListener() {
 function getStoreLatLngAndCreateStore() {
     geocodingUrl = geocodingBaseUrl + "json?address=" + storeAddressInput.val() + "&key=" + geocodingKey;
     $.get(geocodingUrl, {}, function(data) {
-        console.log(data.status);
         if (data.status == "OK") {
-            console.log(data.results[0].geometry.location.lat);
             storeLat = data.results[0].geometry.location.lat;
             storeLng = data.results[0].geometry.location.lng;
             createStore();
@@ -146,7 +144,6 @@ function createStore() {
             storeIntro : storeIntroInput.val()
         },
         success: function(data) {
-            alert('success');
             window.location.assign(storeLandingUrl);
         }
     });

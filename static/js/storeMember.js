@@ -81,7 +81,6 @@ function showEmployee() {
 function setDeleteEmployeeButtonClickEventListener() {
     $('button.deleteEmployee').click(function(e) {
         e.preventDefault();
-        console.log($(this).attr('data-userId') + " " + storage['storeId']);
         $.ajax({
             url : deleteEmployeeUrl + storage['storeId'] + "/" + $(this).attr('data-userId'),
             type : 'DELETE',

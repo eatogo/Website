@@ -118,7 +118,6 @@ function setSubmitButtonClickEventListener() {
                 success: function(data) {
                     if (data.status == 200) {
                         clearErrorMessage();
-                        alert('success');
                         storage['userId'] = data.auth.userId;
                         storage['auth'] = data.auth.userUuid;
                         storage['userName'] = data.user.userName;

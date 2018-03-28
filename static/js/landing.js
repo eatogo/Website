@@ -131,7 +131,8 @@ function setSingleStore(storeInfo) {
     if (storeInfo.storeLogo == 'defaultStore.png') {
         storeLogo = "/static/images/defaultStore.png";
     } else {
-        storeLogo = "/static/images/" + storeInfo.storeLogo;
+        // storeLogo = "/static/images/" + storeInfo.storeLogo;
+        storeLogo = "/static/images/defaultStore.png";
     }
     var storeId = storeInfo['storeId'];
     var singleStoreDiv =
@@ -148,12 +149,10 @@ function setSingleStore(storeInfo) {
 
 function setStoreLinkClickEventListener() {
     $('a.item').click(function(e) {
-        alert('clicked');
         e.preventDefault();
         storage['storeId'] = $(this).attr('data-store');
         storage['storeName'] = $(this).attr('data-storeName');
         storage.removeItem('landing');
-        alert($(this).attr('data-store'));
         window.location.assign(storeHomeUrl);
         return false;
     });

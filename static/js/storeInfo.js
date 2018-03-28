@@ -29,7 +29,6 @@ function setStoreInfo() {
     } else {
         $.get(storeInfoUrl + storage['storeId'], {}, function(data) {
             if (data.status == 200) {
-                alert('success');
                 storage['storeInfo'] = data.storePayload;
                 showStoreInfo()
             }
@@ -58,9 +57,7 @@ function setSubmitButtonClickEventListener() {
 function getStoreLatLngAndUpdateStore() {
     geocodingUrl = geocodingBaseUrl + "json?address=" + $('#storeAddress').val() + "&key=" + geocodingKey;
     $.get(geocodingUrl, {}, function(data) {
-        console.log(data.status);
         if (data.status == "OK") {
-            console.log(data.results[0].geometry.location.lat);
             storeLat = data.results[0].geometry.location.lat;
             storeLng = data.results[0].geometry.location.lng;
             updateStoreInfo();
@@ -87,12 +84,10 @@ function updateStoreInfo() {
         },
         success : function(data) {
             if (data.status == 200) {
-                alert('success');
                 storage.removeItem('storeInfo');
                 storage['storeInfo'] = data.storePayload;
                 showStoreInfo();
             } else {
-                alert('failed');
                 showStoreInfo();
             }
         }
